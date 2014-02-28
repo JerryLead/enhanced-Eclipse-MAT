@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/tools/org.eclipse.mat/!svn/ver/1463/trunk/plugins/org.eclipse.mat.api
+END
+.options
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/tools/org.eclipse.mat/!svn/ver/1232/trunk/plugins/org.eclipse.mat.api/.options
+END
+about.ini
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/tools/org.eclipse.mat/!svn/ver/1400/trunk/plugins/org.eclipse.mat.api/about.ini
+END
+build.properties
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/tools/org.eclipse.mat/!svn/ver/1232/trunk/plugins/org.eclipse.mat.api/build.properties
+END
+about.properties
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/tools/org.eclipse.mat/!svn/ver/1450/trunk/plugins/org.eclipse.mat.api/about.properties
+END
+about.mappings
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/tools/org.eclipse.mat/!svn/ver/1463/trunk/plugins/org.eclipse.mat.api/about.mappings
+END
+.fbprefs
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/tools/org.eclipse.mat/!svn/ver/9/trunk/plugins/org.eclipse.mat.api/.fbprefs
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/tools/org.eclipse.mat/!svn/ver/1463/trunk/plugins/org.eclipse.mat.api/pom.xml
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/tools/org.eclipse.mat/!svn/ver/68/trunk/plugins/org.eclipse.mat.api/.project
+END
+plugin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/tools/org.eclipse.mat/!svn/ver/1181/trunk/plugins/org.eclipse.mat.api/plugin.xml
+END
+about.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/tools/org.eclipse.mat/!svn/ver/9/trunk/plugins/org.eclipse.mat.api/about.html
+END
+plugin.properties
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/tools/org.eclipse.mat/!svn/ver/1065/trunk/plugins/org.eclipse.mat.api/plugin.properties
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/tools/org.eclipse.mat/!svn/ver/68/trunk/plugins/org.eclipse.mat.api/.classpath
+END

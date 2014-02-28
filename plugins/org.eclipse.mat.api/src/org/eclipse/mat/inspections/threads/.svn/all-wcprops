@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svnroot/tools/org.eclipse.mat/!svn/ver/1413/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads
+END
+NameValuePair.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/NameValuePair.java
+END
+ThreadInfoQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/1259/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/ThreadInfoQuery.java
+END
+ThreadInfoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/1200/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/ThreadInfoImpl.java
+END
+ThreadOverviewQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svnroot/tools/org.eclipse.mat/!svn/ver/1400/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/ThreadOverviewQuery.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/package-info.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svnroot/tools/org.eclipse.mat/!svn/ver/1413/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/annotations.properties
+END
+TaskInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/threads/TaskInfo.java
+END

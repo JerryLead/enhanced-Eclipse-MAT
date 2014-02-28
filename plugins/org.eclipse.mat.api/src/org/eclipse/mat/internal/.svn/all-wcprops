@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/tools/org.eclipse.mat/!svn/ver/1447/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal
+END
+Messages.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/tools/org.eclipse.mat/!svn/ver/1447/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/Messages.java
+END
+messages.properties
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svnroot/tools/org.eclipse.mat/!svn/ver/1447/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/messages.properties
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/package-info.java
+END
+MATPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/MATPlugin.java
+END

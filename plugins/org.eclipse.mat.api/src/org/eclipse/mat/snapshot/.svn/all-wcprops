@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/tools/org.eclipse.mat/!svn/ver/1443/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot
+END
+MultipleSnapshotsException.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/1443/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/MultipleSnapshotsException.java
+END
+DominatorsSummary.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/DominatorsSummary.java
+END
+ISnapshot.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svnroot/tools/org.eclipse.mat/!svn/ver/1267/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/ISnapshot.java
+END
+ClassLoaderHistogramRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/ClassLoaderHistogramRecord.java
+END
+OQL.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/tools/org.eclipse.mat/!svn/ver/1392/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/OQL.java
+END
+IOQLQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/IOQLQuery.java
+END
+OQLParseException.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svnroot/tools/org.eclipse.mat/!svn/ver/68/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/OQLParseException.java
+END
+SnapshotFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svnroot/tools/org.eclipse.mat/!svn/ver/948/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/SnapshotFactory.java
+END
+UnreachableObjectsHistogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/778/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/UnreachableObjectsHistogram.java
+END
+Histogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svnroot/tools/org.eclipse.mat/!svn/ver/1394/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/Histogram.java
+END
+IPathsFromGCRootsComputer.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/tools/org.eclipse.mat/!svn/ver/93/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/IPathsFromGCRootsComputer.java
+END
+ExcludedReferencesDescriptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/ExcludedReferencesDescriptor.java
+END
+MultiplePathsFromGCRootsRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/MultiplePathsFromGCRootsRecord.java
+END
+ClassHistogramRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/ClassHistogramRecord.java
+END
+MultiplePathsFromGCRootsClassRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/MultiplePathsFromGCRootsClassRecord.java
+END
+SnapshotFormat.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/SnapshotFormat.java
+END
+PathsFromGCRootsTree.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/PathsFromGCRootsTree.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/package-info.java
+END
+HistogramRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/HistogramRecord.java
+END
+HistogramRecordBeanInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/tools/org.eclipse.mat/!svn/ver/1339/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/HistogramRecordBeanInfo.java
+END
+SnapshotInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svnroot/tools/org.eclipse.mat/!svn/ver/1339/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/SnapshotInfo.java
+END
+IMultiplePathsFromGCRootsComputer.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svnroot/tools/org.eclipse.mat/!svn/ver/68/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/IMultiplePathsFromGCRootsComputer.java
+END

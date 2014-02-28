@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/tools/org.eclipse.mat/!svn/ver/1452/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections
+END
+ObjectListQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/ObjectListQuery.java
+END
+SystemPropertiesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/1340/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/SystemPropertiesQuery.java
+END
+LeakHunterQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svnroot/tools/org.eclipse.mat/!svn/ver/1348/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/LeakHunterQuery.java
+END
+BigDropsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/tools/org.eclipse.mat/!svn/ver/1015/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/BigDropsQuery.java
+END
+FindStringsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/1452/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/FindStringsQuery.java
+END
+TopConsumers2Query.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svnroot/tools/org.eclipse.mat/!svn/ver/1151/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/TopConsumers2Query.java
+END
+OQLQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/OQLQuery.java
+END
+ClassLoaderExplorerQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/1394/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/ClassLoaderExplorerQuery.java
+END
+FinalizerReferenceStatQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/FinalizerReferenceStatQuery.java
+END
+ReferenceQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/ReferenceQuery.java
+END
+HeapDumpInfoQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/1447/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/HeapDumpInfoQuery.java
+END
+InspectionAssert.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/InspectionAssert.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/package-info.java
+END
+GroupByValueQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/1151/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/GroupByValueQuery.java
+END
+ClassReferrersQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svnroot/tools/org.eclipse.mat/!svn/ver/834/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/ClassReferrersQuery.java
+END
+CustomizedRetainedSetQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svnroot/tools/org.eclipse.mat/!svn/ver/1259/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/CustomizedRetainedSetQuery.java
+END
+RetainedSetQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/1259/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/RetainedSetQuery.java
+END
+UnreachableObjectsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/UnreachableObjectsQuery.java
+END
+HistogramQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/1394/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/HistogramQuery.java
+END
+ImmediateDominatorsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/ImmediateDominatorsQuery.java
+END
+WeakReferenceStatQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/WeakReferenceStatQuery.java
+END
+TopConsumersQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/TopConsumersQuery.java
+END
+CommonNameResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/CommonNameResolver.java
+END
+DuplicatedClassesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/DuplicatedClassesQuery.java
+END
+WasteInCharArraysQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/1340/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/WasteInCharArraysQuery.java
+END
+PhantomReferenceStatQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/PhantomReferenceStatQuery.java
+END
+GCRootsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svnroot/tools/org.eclipse.mat/!svn/ver/1400/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/GCRootsQuery.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/1266/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/annotations.properties
+END
+SoftReferenceStatQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/SoftReferenceStatQuery.java
+END
+BiggestObjectsPieQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/1155/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/BiggestObjectsPieQuery.java
+END
+FindLeaksQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/FindLeaksQuery.java
+END

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='1'>
+  <artifact classifier='osgi.bundle' id='org.eclipse.mat.api' version='1.3.1.201401031320'>
+    <properties size='5'>
+      <property name='artifact.size' value='693084'/>
+      <property name='download.size' value='693084'/>
+      <property name='maven-groupId' value='org.eclipse.mat'/>
+      <property name='maven-artifactId' value='org.eclipse.mat.api'/>
+      <property name='maven-version' value='1.3.1-SNAPSHOT'/>
+    </properties>
+  </artifact>
+</artifacts>

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svnroot/tools/org.eclipse.mat/!svn/ver/1434/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections
+END
+MultiplePath2GCRootsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/MultiplePath2GCRootsQuery.java
+END
+Path2GCRootsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svnroot/tools/org.eclipse.mat/!svn/ver/1151/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/Path2GCRootsQuery.java
+END
+CompareTablesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svnroot/tools/org.eclipse.mat/!svn/ver/1394/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/CompareTablesQuery.java
+END
+ShowInDominatorQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svnroot/tools/org.eclipse.mat/!svn/ver/1259/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/ShowInDominatorQuery.java
+END
+DominatorQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svnroot/tools/org.eclipse.mat/!svn/ver/1434/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/DominatorQuery.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/package-info.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svnroot/tools/org.eclipse.mat/!svn/ver/1190/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/inspections/annotations.properties
+END

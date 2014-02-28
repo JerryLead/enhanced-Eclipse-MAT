@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svnroot/tools/org.eclipse.mat/!svn/ver/1270/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/eclipse
+END
+EclipseNameResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/eclipse/EclipseNameResolver.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/eclipse/package-info.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/eclipse/annotations.properties
+END
+LeakingPlugins.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/1270/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/eclipse/LeakingPlugins.java
+END

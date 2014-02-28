@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/tools/org.eclipse.mat/!svn/ver/1397/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model
+END
+IArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IArray.java
+END
+IClass.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svnroot/tools/org.eclipse.mat/!svn/ver/962/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IClass.java
+END
+IStackFrame.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/1339/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IStackFrame.java
+END
+PseudoReference.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/PseudoReference.java
+END
+GCRootInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svnroot/tools/org.eclipse.mat/!svn/ver/778/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/GCRootInfo.java
+END
+ObjectReference.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/ObjectReference.java
+END
+FieldDescriptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/FieldDescriptor.java
+END
+IObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svnroot/tools/org.eclipse.mat/!svn/ver/778/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IObject.java
+END
+ThreadToLocalReference.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svnroot/tools/org.eclipse.mat/!svn/ver/1241/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/ThreadToLocalReference.java
+END
+PrettyPrinter.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/1397/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/PrettyPrinter.java
+END
+IClassLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IClassLoader.java
+END
+IInstance.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svnroot/tools/org.eclipse.mat/!svn/ver/68/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IInstance.java
+END
+ObjectComparators.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/ObjectComparators.java
+END
+IPrimitiveArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IPrimitiveArray.java
+END
+Field.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/Field.java
+END
+IThreadStack.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IThreadStack.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/package-info.java
+END
+NamedReference.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/NamedReference.java
+END
+IObjectArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/model/IObjectArray.java
+END

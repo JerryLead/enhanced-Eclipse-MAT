@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/tools/org.eclipse.mat/!svn/ver/1178/trunk/plugins/org.eclipse.mat.api/.settings
+END
+org.eclipse.jdt.core.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/tools/org.eclipse.mat/!svn/ver/68/trunk/plugins/org.eclipse.mat.api/.settings/org.eclipse.jdt.core.prefs
+END
+.api_filters
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/tools/org.eclipse.mat/!svn/ver/1178/trunk/plugins/org.eclipse.mat.api/.settings/.api_filters
+END

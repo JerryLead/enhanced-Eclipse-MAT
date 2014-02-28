@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/tools/org.eclipse.mat/!svn/ver/1345/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer
+END
+FinalizerInProcessingQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/FinalizerInProcessingQuery.java
+END
+FinalizerQueueQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/1345/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/FinalizerQueueQuery.java
+END
+FinalizerThreadQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svnroot/tools/org.eclipse.mat/!svn/ver/1200/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/FinalizerThreadQuery.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/package-info.java
+END
+FinalizerQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/1259/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/FinalizerQuery.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svnroot/tools/org.eclipse.mat/!svn/ver/1193/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/annotations.properties
+END
+FinalizerThreadLocalsQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/finalizer/FinalizerThreadLocalsQuery.java
+END

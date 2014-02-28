@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svnroot/tools/org.eclipse.mat/!svn/ver/1439/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections
+END
+CollectionUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svnroot/tools/org.eclipse.mat/!svn/ver/1439/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/CollectionUtil.java
+END
+CollectionFillRatioQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svnroot/tools/org.eclipse.mat/!svn/ver/1274/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/CollectionFillRatioQuery.java
+END
+ICollectionExtractor.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svnroot/tools/org.eclipse.mat/!svn/ver/920/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/ICollectionExtractor.java
+END
+CollectionsBySizeQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svnroot/tools/org.eclipse.mat/!svn/ver/1274/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/CollectionsBySizeQuery.java
+END
+ArrayFillRatioQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/ArrayFillRatioQuery.java
+END
+ExtractListValuesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/ExtractListValuesQuery.java
+END
+HashEntriesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svnroot/tools/org.eclipse.mat/!svn/ver/987/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/HashEntriesQuery.java
+END
+ArraysBySizeQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/ArraysBySizeQuery.java
+END
+PrimitiveArraysWithAConstantValueQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/PrimitiveArraysWithAConstantValueQuery.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/package-info.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/1047/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/annotations.properties
+END
+MapCollisionRatioQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svnroot/tools/org.eclipse.mat/!svn/ver/1012/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/MapCollisionRatioQuery.java
+END
+HashSetValuesQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/collections/HashSetValuesQuery.java
+END

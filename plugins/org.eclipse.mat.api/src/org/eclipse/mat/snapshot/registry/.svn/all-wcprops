@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/tools/org.eclipse.mat/!svn/ver/1338/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry
+END
+ThreadDetailResolverRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry/ThreadDetailResolverRegistry.java
+END
+SubjectRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry/SubjectRegistry.java
+END
+ClassSpecificNameResolverRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svnroot/tools/org.eclipse.mat/!svn/ver/1338/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry/ClassSpecificNameResolverRegistry.java
+END
+TroubleTicketResolverRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry/TroubleTicketResolverRegistry.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry/package-info.java
+END
+RequestDetailResolverRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/registry/RequestDetailResolverRegistry.java
+END

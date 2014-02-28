@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/tools/org.eclipse.mat/!svn/ver/1422/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query
+END
+PieFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/tools/org.eclipse.mat/!svn/ver/1351/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/PieFactory.java
+END
+ObjectListResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svnroot/tools/org.eclipse.mat/!svn/ver/1422/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/ObjectListResult.java
+END
+Icons.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svnroot/tools/org.eclipse.mat/!svn/ver/1400/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/Icons.java
+END
+TQuantize.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svnroot/tools/org.eclipse.mat/!svn/ver/1103/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/TQuantize.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/package-info.java
+END
+SnapshotQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/1337/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/SnapshotQuery.java
+END
+RetainedSizeDerivedData.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/RetainedSizeDerivedData.java
+END
+IHeapObjectArgument.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/143/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/IHeapObjectArgument.java
+END
+HistogramResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/query/HistogramResult.java
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/jetty
+END
+JettyRequestResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/jetty/JettyRequestResolver.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/jetty/package-info.java
+END
+JettyNameResolvers.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/jetty/JettyNameResolvers.java
+END

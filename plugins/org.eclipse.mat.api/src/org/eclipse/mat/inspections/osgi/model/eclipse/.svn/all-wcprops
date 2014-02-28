@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/eclipse
+END
+Extension.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/eclipse/Extension.java
+END
+ConfigurationElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/eclipse/ConfigurationElement.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/eclipse/package-info.java
+END
+ExtensionPoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/eclipse/ExtensionPoint.java
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/tools/org.eclipse.mat/!svn/ver/1244/trunk/plugins/org.eclipse.mat.api/schema
+END
+ticketResolver.exsd
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/tools/org.eclipse.mat/!svn/ver/1211/trunk/plugins/org.eclipse.mat.api/schema/ticketResolver.exsd
+END
+heapDumpProvider.exsd
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/tools/org.eclipse.mat/!svn/ver/1211/trunk/plugins/org.eclipse.mat.api/schema/heapDumpProvider.exsd
+END
+nameResolver.exsd
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/tools/org.eclipse.mat/!svn/ver/1211/trunk/plugins/org.eclipse.mat.api/schema/nameResolver.exsd
+END
+threadResolver.exsd
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/tools/org.eclipse.mat/!svn/ver/1244/trunk/plugins/org.eclipse.mat.api/schema/threadResolver.exsd
+END
+factory.exsd
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/tools/org.eclipse.mat/!svn/ver/1211/trunk/plugins/org.eclipse.mat.api/schema/factory.exsd
+END
+requestResolver.exsd
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/tools/org.eclipse.mat/!svn/ver/1211/trunk/plugins/org.eclipse.mat.api/schema/requestResolver.exsd
+END

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svnroot/tools/org.eclipse.mat/!svn/ver/1267/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension
+END
+ITroubleTicketResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svnroot/tools/org.eclipse.mat/!svn/ver/932/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/ITroubleTicketResolver.java
+END
+Subject.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/tools/org.eclipse.mat/!svn/ver/1267/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/Subject.java
+END
+Subjects.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svnroot/tools/org.eclipse.mat/!svn/ver/1267/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/Subjects.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/package-info.java
+END
+IThreadDetailsResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svnroot/tools/org.eclipse.mat/!svn/ver/932/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/IThreadDetailsResolver.java
+END
+IClassSpecificNameResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svnroot/tools/org.eclipse.mat/!svn/ver/932/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/IClassSpecificNameResolver.java
+END
+IRequestDetailsResolver.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/932/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/IRequestDetailsResolver.java
+END
+IThreadInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svnroot/tools/org.eclipse.mat/!svn/ver/1203/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/extension/IThreadInfo.java
+END

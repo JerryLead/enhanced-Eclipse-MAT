@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/tools/org.eclipse.mat/!svn/ver/1348/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/component
+END
+TopComponentsReportQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svnroot/tools/org.eclipse.mat/!svn/ver/1103/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/component/TopComponentsReportQuery.java
+END
+ComponentReportQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svnroot/tools/org.eclipse.mat/!svn/ver/1348/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/component/ComponentReportQuery.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/component/package-info.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svnroot/tools/org.eclipse.mat/!svn/ver/1132/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/component/annotations.properties
+END

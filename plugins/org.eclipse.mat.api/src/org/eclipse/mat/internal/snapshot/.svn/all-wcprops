@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/tools/org.eclipse.mat/!svn/ver/1445/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot
+END
+HeapObjectParamArgument.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/HeapObjectParamArgument.java
+END
+ArgumentParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/ArgumentParser.java
+END
+SnapshotQueryContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svnroot/tools/org.eclipse.mat/!svn/ver/1445/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/SnapshotQueryContext.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/package-info.java
+END
+HeapObjectArgumentFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svnroot/tools/org.eclipse.mat/!svn/ver/1412/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/HeapObjectArgumentFactory.java
+END
+SnapshotArgument.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/SnapshotArgument.java
+END
+HeapObjectContextArgument.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/snapshot/HeapObjectContextArgument.java
+END

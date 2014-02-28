@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model
+END
+IBundleReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/IBundleReader.java
+END
+EquinoxBundleReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/828/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/EquinoxBundleReader.java
+END
+Service.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/Service.java
+END
+BundleReaderFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/BundleReaderFactory.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/package-info.java
+END
+OSGiModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/tools/org.eclipse.mat/!svn/ver/1243/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/OSGiModel.java
+END
+Bundle.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/Bundle.java
+END
+BundleFragment.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/BundleFragment.java
+END
+BundleDescriptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/model/BundleDescriptor.java
+END

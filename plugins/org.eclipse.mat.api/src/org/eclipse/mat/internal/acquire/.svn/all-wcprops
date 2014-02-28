@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/tools/org.eclipse.mat/!svn/ver/1232/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/acquire
+END
+HeapDumpProviderDescriptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svnroot/tools/org.eclipse.mat/!svn/ver/1232/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/acquire/HeapDumpProviderDescriptor.java
+END
+HeapDumpProviderRegistry.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svnroot/tools/org.eclipse.mat/!svn/ver/1232/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/acquire/HeapDumpProviderRegistry.java
+END
+ProviderArgumentsSet.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/588/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/acquire/ProviderArgumentsSet.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/acquire/package-info.java
+END
+VmInfoDescriptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/tools/org.eclipse.mat/!svn/ver/732/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/internal/acquire/VmInfoDescriptor.java
+END

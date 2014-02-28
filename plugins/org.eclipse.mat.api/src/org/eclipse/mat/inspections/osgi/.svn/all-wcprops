@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/tools/org.eclipse.mat/!svn/ver/1400/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi
+END
+BundleRegistryQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svnroot/tools/org.eclipse.mat/!svn/ver/1400/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/BundleRegistryQuery.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/758/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/package-info.java
+END
+annotations.properties
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/1046/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/inspections/osgi/annotations.properties
+END

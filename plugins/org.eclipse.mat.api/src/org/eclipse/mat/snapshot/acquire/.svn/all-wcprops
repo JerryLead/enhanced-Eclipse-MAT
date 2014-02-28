@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/tools/org.eclipse.mat/!svn/ver/1212/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/acquire
+END
+IHeapDumpProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/tools/org.eclipse.mat/!svn/ver/1212/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/acquire/IHeapDumpProvider.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svnroot/tools/org.eclipse.mat/!svn/ver/756/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/acquire/package-info.java
+END
+VmInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svnroot/tools/org.eclipse.mat/!svn/ver/1205/trunk/plugins/org.eclipse.mat.api/src/org/eclipse/mat/snapshot/acquire/VmInfo.java
+END
