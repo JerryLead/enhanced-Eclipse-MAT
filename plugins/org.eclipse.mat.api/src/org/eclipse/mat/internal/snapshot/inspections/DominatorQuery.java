@@ -149,8 +149,11 @@ public class DominatorQuery implements IQuery
 			//tAnalyzer.threadOverview();
             tAnalyzer.findStacks(dominatorIds, threadNames);
             */
-            DiagOOM tool = new DiagOOM(snapshot, new DefaultTree(snapshot, roots, elements), "map");
+            
+            DefaultTree dt = new DefaultTree(snapshot, roots, elements);
+            DiagOOM tool = new DiagOOM(snapshot, dt, "shuffle", 5.0f);
             tool.classifyObjects();
+            // tool.findReferencedThreads();
             //added end
             return new DefaultTree(snapshot, roots, elements);
         }

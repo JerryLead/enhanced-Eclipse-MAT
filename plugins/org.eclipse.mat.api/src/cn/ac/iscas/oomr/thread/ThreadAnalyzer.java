@@ -60,7 +60,7 @@ public class ThreadAnalyzer {
 				
 				if(tName != null) {
 					for(String name : threadNames) {
-						if(tName.equals(name)) {
+						if(tName.startsWith(name)) {
 							threadsToCheck.add(threadObj);
 							break;
 						}
@@ -221,11 +221,26 @@ public class ThreadAnalyzer {
 	public Map<Integer, Path> findReferencedThreads(List<Row> userObjs) {
 		String[] threadNames = null;
 		
-		if(phase.equals("map")) {
+		if(phase.equals("map") || phase.equals("spill") || phase.equals("merge")) {
 			threadNames = new String[2];
 			threadNames[0] = "main";
 			threadNames[1] = "SpillThread";
+		} 
+		
+		else if(phase.equals("shuffle") || phase.equals("sort")) {
+			threadNames = new String[4];
+			threadNames[0] = "main";
+			threadNames[1] = "MapOutputCopier";
+			threadNames[2] = "Thread for merging in memory files";
+			threadNames[3] = "Thread for merging on-disk files";
 		}
+		
+		else if(phase.equals("reduce")) {
+			threadNames = new String[2];
+			threadNames[0] = "main";
+			threadNames[1] = "Readahead";
+		}
+		
 			
 			
 		List<Object> threadsOverview = selectThreads(threadNames);
@@ -455,7 +470,6 @@ public class ThreadAnalyzer {
 	public void getThreadOverview() {
 		ThreadOverviewQuery impl = new ThreadOverviewQuery();
 		impl.setSnapshot(snapshot);
-
 		
 		try {
 			result = (IResultTree) impl.execute(new VoidProgressListener());
@@ -530,14 +544,17 @@ public class ThreadAnalyzer {
 	}
 
 	public void display(Map<Integer, Path> dominatorsToThreads) {
+		System.out.println("|------------------------ dominators => Threads/func() ------------------------|");
+		
 		for(Entry<Integer, Path> dt : dominatorsToThreads.entrySet()) {
 			int dominatorId = dt.getKey();
 			try {
 				IObject dominator = snapshot.getObject(dominatorId);
 				Path p = dt.getValue();
 				
-				System.out.println(dominator.getDisplayName());
+				System.out.println("[" + dominator.getTechnicalName() + "] =>");
 				p.display(snapshot);
+				System.out.println();
 				
 			} catch (SnapshotException e) {
 				// TODO Auto-generated catch block

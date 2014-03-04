@@ -42,53 +42,54 @@ public class Path {
 		try {
 		 
 			if(!map.isEmpty()) {
-				System.out.println("\t--------------------------map()--------------------------");
+				System.out.println("\t|---------------------------- in map() ----------------------------|");
 				for(SinglePath sp : map) {
-					System.out.println("\t\t" + sp.getStackframe().getText());
 					
+					System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");	
 					for(Integer id : sp.getPath())
-						
-							System.out.println("\t\t  " + snapshot.getObject(id).getDisplayName()+ "[" + id + "]");
-						
-					
-					System.out.println("\t\t  " + "--------------------------------------------------------");	
+							System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
+					System.out.println();
 				}
 			}
 			
 			if(!combine.isEmpty()) {
-				System.out.println("\t------------------------combine()-------------------------");
+				System.out.println("\t|----------------------------  in combine() ----------------------------|");
 				for(SinglePath sp : combine) {
-					System.out.println("\t\t" + sp.getStackframe().getText());
+					
+					System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");	
 					
 					for(Integer id : sp.getPath()) 
-						System.out.println("\t\t  " + snapshot.getObject(id).getDisplayName()+ "[" + id + "]");
-					
-					System.out.println("\t\t  " + "--------------------------------------------------------");	
+						System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");
+					System.out.println();			
 				}
 			}
 			
 			
 			if(!reduce.isEmpty()) {
-				System.out.println("\t--------------------------reduce()-------------------------");
+				System.out.println("\t|----------------------------  in reduce() ----------------------------|");
 				for(SinglePath sp : reduce) {
-					System.out.println("\t\t" + sp.getStackframe().getText());
+						
+					System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");
 					
 					for(Integer id : sp.getPath()) 
-						System.out.println("\t\t  " + snapshot.getObject(id).getDisplayName()+ "[" + id + "]");
-					
-					System.out.println("\t\t  " + "--------------------------------------------------------");	
+						System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
+					System.out.println();
 				}
 			}
 			
 			if(!others.isEmpty()) {
-				System.out.println("\t--------------------------others---------------------------");
+				System.out.println("\t|---------------------------- in other func() ----------------------------|");
 				for(SinglePath sp : others) {
-					System.out.println("\t\t" + sp.getStackframe().getText());
+					
+					System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");	
 					
 					for(Integer id : sp.getPath()) 
-						System.out.println("\t\t  " + snapshot.getObject(id).getDisplayName()+ "[" + id + "]");
-					
-					System.out.println("\t\t  " + "--------------------------------------------------------");	
+						System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");
+					System.out.println();
 				}
 			}
 			

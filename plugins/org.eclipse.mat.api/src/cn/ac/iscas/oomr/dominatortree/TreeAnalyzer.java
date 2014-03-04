@@ -10,7 +10,6 @@ import org.eclipse.mat.query.IResultTree;
 import org.eclipse.mat.snapshot.ISnapshot;
 import org.eclipse.mat.snapshot.model.IObject;
 
-import cn.ac.iscas.oomr.map.MapPhaseAnalyzer;
 
 public class TreeAnalyzer {
 
@@ -27,17 +26,19 @@ public class TreeAnalyzer {
 	 * @return
 	 */
 	private List<Row> expandDominators(List<Row> rawLargeDominators) {
-		List<Row> largeObjs = new ArrayList<Row>();
+		List<Row> expandedObjs = new ArrayList<Row>();
 		
 		for(Row row : rawLargeDominators) {
 			if(row.getClassName().startsWith("java.lang.Thread @")) {
 				
 				List<Row> subDominators = subDominateObjs(row.getObjectId());
-				largeObjs.addAll(subDominators);
+				expandedObjs.addAll(subDominators);
 			}	
+			else
+				expandedObjs.add(row);
 		}
 
-		return largeObjs;
+		return expandedObjs;
 	}
 	
 	private List<Row> getAndSortDomiantors() {
@@ -88,22 +89,13 @@ public class TreeAnalyzer {
 
 	public List<Row> getLargeDominators(float mb) {
 		List<Row> allDominators = getAndSortDomiantors();
-		List<Row> largeDominators = selectLargeDominators(allDominators, mb);
-		
-		displayLargeDominators(largeDominators);
+		List<Row> largeDominators = selectLargeDominators(allDominators, mb);		
 		
 		return largeDominators;
 	}
 	
 	
-	public void displayLargeDominators(List<Row> rows) {
-		System.out.println("Class name \t| shallowHeap \t| retainedHeap");
-		System.out.println(":----------- | -----------: | -----------:");
-		
-		for (Row row : rows)
-			System.out.println(row);
-	}
-	
+
 	
 	
 	public int[] selectLargeObjects(List<Row> rows, int mb) {

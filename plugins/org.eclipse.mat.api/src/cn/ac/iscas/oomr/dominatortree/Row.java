@@ -11,6 +11,8 @@ public class Row implements Comparable<Row> {
 	private long shallowHeap;
 	private long retainedHeap;
 	
+	private String frameObjName = null;
+	
 	public Row(IObject obj) {
 		objectId = obj.getObjectId();
 		className = obj.getTechnicalName();
@@ -34,6 +36,13 @@ public class Row implements Comparable<Row> {
 		return shallowHeap;
 	}
 
+	public String getFrameObjName() {
+		return frameObjName;
+	}
+
+	public void setFrameObjName(String frameObjName) {
+		this.frameObjName = frameObjName;
+	}
 
 	public int compareTo(Row o) {
 		long diff = this.retainedHeap - o.getRetainedHeap();
@@ -47,6 +56,10 @@ public class Row implements Comparable<Row> {
 	
 	public String toString() {
 		DecimalFormat format = new DecimalFormat(",###");
-		return className + "\t|" + format.format(shallowHeap) + "\t|" + format.format(retainedHeap);		
+		
+		if(frameObjName == null)
+			return "| " + className + "\t| " + format.format(shallowHeap) + "\t| " + format.format(retainedHeap) + "\t|";	
+		else
+			return "| " + frameObjName + "\t| " + className + "\t| " + format.format(shallowHeap) + "\t| " + format.format(retainedHeap) + "\t|";
 	}
 }

@@ -6,9 +6,10 @@ import java.util.Map;
 import org.eclipse.mat.query.IResultTree;
 import org.eclipse.mat.snapshot.ISnapshot;
 
+import cn.ac.iscas.oomr.classifier.MapPhaseAnalyzer;
+import cn.ac.iscas.oomr.classifier.ShuffleSortPhaseAnalyzer;
 import cn.ac.iscas.oomr.dominatortree.Row;
 import cn.ac.iscas.oomr.dominatortree.TreeAnalyzer;
-import cn.ac.iscas.oomr.map.MapPhaseAnalyzer;
 import cn.ac.iscas.oomr.thread.ThreadAnalyzer;
 import cn.ac.iscas.oomr.thread.path.Path;
 
@@ -26,8 +27,8 @@ import cn.ac.iscas.oomr.thread.path.Path;
 public class DiagOOM {
 	
 	// results
-	private List<FrameworkObj> fObjs;
-	private List<UserObj> uObjs;
+	private List<Row> frameworkObjs;
+	private List<Row> userObjs;
 	
 	// hooks of heap dump and dominator objects
 	private ISnapshot snapshot;
@@ -36,28 +37,37 @@ public class DiagOOM {
 	// occurring phase of OOM
 	private String phase;
 	
-	public DiagOOM(ISnapshot snapshot, IResultTree dominatorRootTree, String phase) {
+	// object that are smaller than sizeLimit will be neglected
+	private float sizeLimitMB;
+	
+	public DiagOOM(ISnapshot snapshot, IResultTree dominatorRootTree, String phase, float sizeLimitMB) {
 		this.snapshot = snapshot;
 		this.dominatorRootTree = dominatorRootTree;
 		this.phase = phase;
+		this.sizeLimitMB = sizeLimitMB;
 	}
 	
 	// classify the memory-consuming objects into framework and user objects 
 	public void classifyObjects() {
-		List<Row> largeDominators = getLargeDominators(5.0f);
-		List<Row> userObjs = filterFrameworkObjs(largeDominators);
+		// get raw memory-consuming objects
+		List<Row> largeDominators = getLargeDominators(sizeLimitMB);
 		
+		userObjs = filterFrameworkObjs(largeDominators);
+		displayLargeDominators(userObjs, "User objects");
+	}
+	
+	// find the referenced threads/code() of each user object
+	public void findReferencedThreads() {
 		if(!userObjs.isEmpty())
 			findReferencedThreads(userObjs);
 	}
-	
 	
 	
 	/**
 	 * @param mb Object which is larger than mb will be selected
 	 * @return large dominators from the dominator tree, List\<Row\> is empty if none objects are larger than mb
 	 */
-	private List<Row> getLargeDominators(float mb) {
+	public List<Row> getLargeDominators(float mb) {
 		TreeAnalyzer treeAnalyzer = new TreeAnalyzer(snapshot, dominatorRootTree);
 		return treeAnalyzer.getLargeDominators(mb);
 	}
@@ -67,19 +77,18 @@ public class DiagOOM {
 	 * @return user objects
 	 */
 	private List<Row> filterFrameworkObjs(List<Row> largeDominators) {
-		if(phase.equals("map")) {
+		if(phase.equals("map") || phase.equals("spill")) {
 			MapPhaseAnalyzer mapAnaly = new MapPhaseAnalyzer(snapshot, largeDominators);
 			return mapAnaly.filterFrameworkObjs();
 		}
-		else if(phase.equals("spill")) {
-			
-		}
+		
 		else if(phase.equals("merge")) {
 			
 		}
 		
 		else if(phase.equals("shuffle")) {
-			
+			ShuffleSortPhaseAnalyzer ssAnaly = new ShuffleSortPhaseAnalyzer(snapshot, largeDominators);
+			return ssAnaly.filterFrameworkObjs();
 		}
 		
 		else if(phase.equals("sort")) {
@@ -93,9 +102,24 @@ public class DiagOOM {
 		return largeDominators;
 	}
 	
-	private void findReferencedThreads(List<Row> userObjs) {
+	public void findReferencedThreads(List<Row> userObjs) {
 		ThreadAnalyzer threadAnaly = new ThreadAnalyzer(snapshot, phase);
 		Map<Integer, Path> dominatorsToThreads = threadAnaly.findReferencedThreads(userObjs);
 		threadAnaly.display(dominatorsToThreads);
 	}
+	
+	public void displayLargeDominators(List<Row> rows, String name) {
+		if(rows == null || rows.isEmpty())
+			return;
+		
+		System.out.println("|------------------------- " + name + " -------------------------|");
+		System.out.println("| Class name \t| shallowHeap \t| retainedHeap |");
+		System.out.println("|:-------------- | --------------: | --------------:|");
+		
+		for (Row row : rows)
+			System.out.println(row);
+		System.out.println();
+		System.out.println();
+	}
+	
 }
