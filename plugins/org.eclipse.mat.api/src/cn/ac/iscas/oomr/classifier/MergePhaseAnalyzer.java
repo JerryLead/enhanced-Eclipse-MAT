@@ -11,10 +11,9 @@ import org.eclipse.mat.snapshot.model.NamedReference;
 
 import cn.ac.iscas.oomr.dominatortree.Row;
 
-public class MapPhaseAnalyzer {
+public class MergePhaseAnalyzer {
 
-	// framework objects
-	private Row kvbuffer;
+	// Hadoop forgets to reclaim kvoffsets and kvindices in merge phase
 	private Row kvoffsets;
 	private Row kvindices;
 
@@ -23,7 +22,7 @@ public class MapPhaseAnalyzer {
 	
 	private Set<Integer> toDeleteObjIds;
 	
-	public MapPhaseAnalyzer(ISnapshot snapshot, List<Row> largeDominators) {
+	public MergePhaseAnalyzer(ISnapshot snapshot, List<Row> largeDominators) {
 		this.snapshot = snapshot;
 		this.largeDominators = largeDominators;
 	}
@@ -76,14 +75,7 @@ public class MapPhaseAnalyzer {
 
 		try {
 			for (NamedReference ref : outRefs) {
-				if (ref.getName().equals("kvbuffer")) {
-					int objectId = ref.getObjectId();
-					IObject obj = snapshot.getObject(objectId);
-					kvbuffer = new Row(obj);
-					kvbuffer.setFrameObjName("kvbuffer");
-					toDeleteObjIds.add(objectId);
-				}
-				else if(ref.getName().equals("kvindices")) {
+				if(ref.getName().equals("kvindices")) {
 					int objectId = ref.getObjectId();
 					IObject obj = snapshot.getObject(objectId);
 					kvindices = new Row(obj);
@@ -104,9 +96,9 @@ public class MapPhaseAnalyzer {
 			e.printStackTrace();
 		}
 		
-		if(kvbuffer == null || kvindices == null || kvoffsets == null) {
-			System.err.println("kvbuffer or kvindices or kvoffsets does not exist.");
-			System.err.println("kvbuffer = " + kvbuffer + ", kvindices = " + kvindices + ", kvoffsets = " + kvoffsets);
+		if( kvindices == null || kvoffsets == null) {
+			System.err.println("kvindices or kvoffsets does not exist.");
+			System.err.println("kvindices = " + kvindices + ", kvoffsets = " + kvoffsets);
 		}
 		
 	}
@@ -118,7 +110,6 @@ public class MapPhaseAnalyzer {
 		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
 		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 		
-		System.out.println(kvbuffer);
 		System.out.println(kvindices);
 		System.out.println(kvoffsets);
 		

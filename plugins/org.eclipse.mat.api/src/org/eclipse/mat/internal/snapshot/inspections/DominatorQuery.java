@@ -151,7 +151,7 @@ public class DominatorQuery implements IQuery
             */
             
             DefaultTree dt = new DefaultTree(snapshot, roots, elements);
-            DiagOOM tool = new DiagOOM(snapshot, dt, "shuffle", 5.0f);
+            DiagOOM tool = new DiagOOM(snapshot, dt, "reduce", 5.0f);
             tool.classifyObjects();
             // tool.findReferencedThreads();
             //added end

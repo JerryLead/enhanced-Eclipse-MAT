@@ -7,11 +7,14 @@ import org.eclipse.mat.query.IResultTree;
 import org.eclipse.mat.snapshot.ISnapshot;
 
 import cn.ac.iscas.oomr.classifier.MapPhaseAnalyzer;
+import cn.ac.iscas.oomr.classifier.MergePhaseAnalyzer;
+import cn.ac.iscas.oomr.classifier.ReducePhaseAnalyzer;
 import cn.ac.iscas.oomr.classifier.ShuffleSortPhaseAnalyzer;
 import cn.ac.iscas.oomr.dominatortree.Row;
 import cn.ac.iscas.oomr.dominatortree.TreeAnalyzer;
 import cn.ac.iscas.oomr.thread.ThreadAnalyzer;
 import cn.ac.iscas.oomr.thread.path.Path;
+import cn.ac.iscas.oomr.userobject.UserObjectExtender;
 
 /**
  * Given the heap dump of a mapper/reducer, DiagOOM will figure out the valuable information 
@@ -27,7 +30,7 @@ import cn.ac.iscas.oomr.thread.path.Path;
 public class DiagOOM {
 	
 	// results
-	private List<Row> frameworkObjs;
+	// private List<Row> frameworkObjs;
 	private List<Row> userObjs;
 	
 	// hooks of heap dump and dominator objects
@@ -62,7 +65,10 @@ public class DiagOOM {
 			findReferencedThreads(userObjs);
 	}
 	
-	
+	// explore the details of individual object (e.g., explore the elements in ArrayList)
+	public void refineUserObjects() {
+		UserObjectExtender uExtender = new UserObjectExtender(snapshot, userObjs);
+	}
 	/**
 	 * @param mb Object which is larger than mb will be selected
 	 * @return large dominators from the dominator tree, List\<Row\> is empty if none objects are larger than mb
@@ -83,20 +89,18 @@ public class DiagOOM {
 		}
 		
 		else if(phase.equals("merge")) {
-			
+			MergePhaseAnalyzer mergeAnaly = new MergePhaseAnalyzer(snapshot, largeDominators);
+			return mergeAnaly.filterFrameworkObjs();
 		}
 		
-		else if(phase.equals("shuffle")) {
+		else if(phase.equals("shuffle") || phase.equals("sort")) {
 			ShuffleSortPhaseAnalyzer ssAnaly = new ShuffleSortPhaseAnalyzer(snapshot, largeDominators);
 			return ssAnaly.filterFrameworkObjs();
 		}
 		
-		else if(phase.equals("sort")) {
-			
-		}
-		
 		else if(phase.equals("reduce")) {
-			
+			ReducePhaseAnalyzer redAnaly = new ReducePhaseAnalyzer(snapshot, largeDominators);
+			return redAnaly.filterFrameworkObjs();
 		}
 		
 		return largeDominators;

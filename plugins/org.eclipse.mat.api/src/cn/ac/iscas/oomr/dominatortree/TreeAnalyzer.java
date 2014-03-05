@@ -29,7 +29,9 @@ public class TreeAnalyzer {
 		List<Row> expandedObjs = new ArrayList<Row>();
 		
 		for(Row row : rawLargeDominators) {
-			if(row.getClassName().startsWith("java.lang.Thread @")) {
+			if(row.getClassName().startsWith("java.lang.Thread @") 
+					|| row.getClassName().startsWith("org.apache.hadoop.mapred.ReduceTask$ReduceCopier$InMemFSMergeThread @")
+					|| row.getClassName().startsWith("org.apache.hadoop.mapred.MapTask$MapOutputBuffer$SpillThread @")) {
 				
 				List<Row> subDominators = subDominateObjs(row.getObjectId());
 				expandedObjs.addAll(subDominators);

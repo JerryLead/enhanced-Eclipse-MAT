@@ -59,7 +59,18 @@ public class Row implements Comparable<Row> {
 		
 		if(frameObjName == null)
 			return "| " + className + "\t| " + format.format(shallowHeap) + "\t| " + format.format(retainedHeap) + "\t|";	
-		else
+		else {
+			if(frameObjName.contains(".")) {
+				if(frameObjName.contains("attempt")) {
+					frameObjName = frameObjName.substring(frameObjName.indexOf("$") + 1);
+				}
+					
+				else
+					frameObjName = frameObjName.substring(frameObjName.lastIndexOf(".") + 1);
+			}
+				
 			return "| " + frameObjName + "\t| " + className + "\t| " + format.format(shallowHeap) + "\t| " + format.format(retainedHeap) + "\t|";
+		}
+			
 	}
 }

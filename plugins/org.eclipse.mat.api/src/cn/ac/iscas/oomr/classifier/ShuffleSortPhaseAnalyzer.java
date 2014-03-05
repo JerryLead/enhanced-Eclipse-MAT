@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
-import java.util.jar.Attributes.Name;
 
 import org.eclipse.mat.SnapshotException;
 import org.eclipse.mat.snapshot.ISnapshot;
@@ -109,7 +108,7 @@ public class ShuffleSortPhaseAnalyzer {
 		
 		for(Row r : subDominatorsObjs) {
 			if(r.getClassName().startsWith("byte[")) {
-				r.setFrameObjName("[SegmentInCopy] " + attemptTask);
+				r.setFrameObjName(mapOutputCopier.getDisplayName());
 				segmentsInCopy.add(r);
 				break;
 			}
@@ -154,8 +153,16 @@ public class ShuffleSortPhaseAnalyzer {
 									List<Row> mapOutputs = subDominateObjs(entry.getObjectId());
 									for(Row mapOutput : mapOutputs) {
 										if(mapOutput.getClassName().startsWith("org.apache.hadoop.mapred.ReduceTask$ReduceCopier$MapOutput")) {
-											mapOutput.setFrameObjName("MapOutput");
-											segmentsInList.add(mapOutput);
+											
+											List<Row> bytes = subDominateObjs(mapOutput.getObjectId());
+											for(Row byteRef : bytes) {
+												
+												if(byteRef.getClassName().startsWith("byte[")) {
+													byteRef.setFrameObjName(mapOutput.getClassName());
+													segmentsInList.add(byteRef);
+												}
+											}
+											
 										}
 									}
 								}
@@ -181,6 +188,7 @@ public class ShuffleSortPhaseAnalyzer {
 				
 				try {
 					processSegmentsInMergeQueue(snapshot.getObject(r.getObjectId()));
+					toDeleteObjIds.add(r.getObjectId());
 				} catch (SnapshotException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -237,6 +245,7 @@ public class ShuffleSortPhaseAnalyzer {
 												if(bufferRef.getName().equals("buf")) {
 													Row segmentInMerge = new Row(bufferRef.getObject());
 													segmentInMerge.setFrameObjName(heapRef.getObject().getTechnicalName());
+													segmentsInMerge.add(segmentInMerge);
 													toDeleteObjIds.add(bufferRef.getObjectId());
 													toDeleteObjIds.add(heapRef.getObjectId());
 												}
@@ -336,7 +345,7 @@ public class ShuffleSortPhaseAnalyzer {
 	}
 
 	
-	// delete the spillBuffer dominator from the List<Row> largeDominators
+	// delete the segments from the List<Row> largeDominators
 	// the remaining objects are regarded as user objects
 	
 	private void deleteFrameworkObjs() {
@@ -373,7 +382,7 @@ public class ShuffleSortPhaseAnalyzer {
 	}
 	
 	private void displayFrameworkObjs() {
-		System.out.println("|-------------------Framework objects in map phase-------------------|");
+		System.out.println("|-------------------Framework objects in shuffle & sort phase-------------------|");
 		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
 		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 		
@@ -408,7 +417,9 @@ public class ShuffleSortPhaseAnalyzer {
 			System.out.println("[minSegment] => ");
 			System.out.println(minSegment);
 		}
-
+		
+		System.out.println();
+		System.out.println();
 	}
 
 }
