@@ -57,6 +57,8 @@ public class DiagOOM {
 		
 		userObjs = filterFrameworkObjs(largeDominators);
 		displayLargeDominators(userObjs, "User objects");
+		
+		refineUserObjects();
 	}
 	
 	// find the referenced threads/code() of each user object
@@ -68,6 +70,7 @@ public class DiagOOM {
 	// explore the details of individual object (e.g., explore the elements in ArrayList)
 	public void refineUserObjects() {
 		UserObjectExtender uExtender = new UserObjectExtender(snapshot, userObjs);
+		uExtender.extendUserObjs();
 	}
 	/**
 	 * @param mb Object which is larger than mb will be selected

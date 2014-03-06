@@ -1,7 +1,6 @@
 package cn.ac.iscas.oomr.userobject;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.eclipse.mat.SnapshotException;
@@ -26,10 +25,20 @@ public class UserObjectExtender {
 			for(Row userObj : userObjs) {
 				String className = userObj.getClassName();
 				
-				if(className.startsWith("java.util.ArrayList @"))
-					handleArrayList(snapshot.getObject(userObj.getObjectId()));
-				else if(className.startsWith("java.util.HashMap @"))
-					handleHashMap(snapshot.getObject(userObj.getObjectId()));
+				if(className.startsWith("java.util.ArrayList @")) {
+					ListObj listObj = handleArrayList(snapshot.getObject(userObj.getObjectId()));
+					listObj.display();
+				}
+				
+				else if(className.startsWith("java.util.HashMap @")) {
+					MapObj mapObj = handleHashMap(snapshot.getObject(userObj.getObjectId()));
+					mapObj.display();
+				}
+				
+				else if(className.startsWith("java.util.LinkedList @")) {
+					ListObj listObj = handleLinkedList(snapshot.getObject(userObj.getObjectId()));
+					listObj.display();
+				}
 					
 			}
 		} catch (SnapshotException e) {
@@ -39,89 +48,66 @@ public class UserObjectExtender {
 	}
 	
 	public ListObj handleArrayList(IObject arrayListObj) {
-		ListObj listObj = new ListObj();
+
+		try {
+			int[] listChildren = snapshot.getImmediateDominatedIds(arrayListObj.getObjectId());
 		
-		List<Row> listChildren = subDominateObjs(arrayListObj.getObjectId());
-		for(Row listChild : listChildren) {
-			
-			if(listChild.getClassName().startsWith("java.lang.Object[")) {
-				
-				List<Row> objectChildren = subDominateObjs(listChild.getObjectId());
-				listObj.setElements(objectChildren);
-				
-			}
-		}
-		return listObj;
 		
-	}
-	
-	/*
-	public MapObj handleHashMap(IObject hashMapObj) throws SnapshotException {
-		// Class name of hashMapObj is "java.util.HashMap @"
-		List<NamedReference> hashMapObjRefs = hashMapObj.getOutboundReferences();
-		for(NamedReference hashMapObjRef : hashMapObjRefs) {
+			for(Integer listChild : listChildren) {
 			
-			if(hashMapObjRef.getName().equals("table")) {
+				if(snapshot.getObject(listChild).getTechnicalName().startsWith("java.lang.Object[")) {
 				
-				List<NamedReference> tableRefs = hashMapObjRef.getObject().getOutboundReferences();
-				
-				MapObj mapObj = new MapObj();
-				for(NamedReference tableRef : tableRefs) {
-					
-					if(tableRef.getName().startsWith("[")) {
+					int[] objectChildren = snapshot.getImmediateDominatedIds(listChild);
+					if(objectChildren.length != 0) {
+						ListObj listObj = new ListObj(new Row(arrayListObj));
+						listObj.setElements(objectChildren);
+						listObj.setFirstElem(new Row(snapshot.getObject(objectChildren[0])));
 						
-						
-						List<NamedReference> entryRefs = tableRef.getObject().getOutboundReferences();
-						for(NamedReference entryRef : entryRefs) {
-							if(entryRef.getName().equals("key")) {
-								int keyObjId = entryRef.getObjectId();
-								mapObj.addKey(snapshot.getObject(keyObjId));
-							}
-							else if(entryRef.getName().equals("value")) {
-								int valueObjId = entryRef.getObjectId();
-								mapObj.addValue(snapshot.getObject(valueObjId));
-							}
-						}
+						return listObj;
 					}
-					
+						
 				}
-				
-				return mapObj;
 			}
+		} catch (SnapshotException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return null;
+		
 	}
-	*/
+	
 
 	public MapObj handleHashMap(IObject hashMapObj) throws SnapshotException {
+		
 		// Class name of hashMapObj is "java.util.HashMap @"
-		List<Row> hashMapObjChildren = subDominateObjs(hashMapObj.getObjectId());
-		for(Row hashMapObjChild : hashMapObjChildren) {
+		int[] hashMapObjChildren = snapshot.getImmediateDominatedIds(hashMapObj.getObjectId());
+		for(int hashMapObjChild : hashMapObjChildren) {
 			
-			if(hashMapObjChild.getClassName().startsWith("java.util.HashMap$Entry[")) {
+			if(snapshot.getObject(hashMapObjChild).getTechnicalName().startsWith("java.util.HashMap$Entry[")) {
+
+				int[] entryChildren = snapshot.getImmediateDominatedIds(hashMapObjChild);
 				
-				List<Row> entryChildren = subDominateObjs(hashMapObjChild.getObjectId());
 				
-				
-				MapObj mapObj = new MapObj();
-				
-				for(Row entryChild : entryChildren) {
-					List<NamedReference> entryRefs = snapshot.getObject(entryChild.getObjectId()).getOutboundReferences();
+				if(entryChildren.length != 0) {
+					MapObj mapObj = new MapObj(new Row(hashMapObj));
+					mapObj.setElementIds(entryChildren);
+					
+					List<NamedReference> entryRefs = snapshot.getObject(entryChildren[0]).getOutboundReferences();
 					for(NamedReference entryRef : entryRefs) {
 						if(entryRef.getName().equals("key")) {
 							int keyObjId = entryRef.getObjectId();
-							mapObj.addKey(snapshot.getObject(keyObjId));
+							mapObj.setKey(snapshot.getObject(keyObjId));
 						}
 						else if(entryRef.getName().equals("value")) {
 							int valueObjId = entryRef.getObjectId();
-							mapObj.addValue(snapshot.getObject(valueObjId));
+							mapObj.setValue(snapshot.getObject(valueObjId));
 						}
 					}
-						
+					return mapObj;
 				}
 
-				return mapObj;
+				
 			}
 		}
 		
@@ -132,8 +118,35 @@ public class UserObjectExtender {
 		
 	}
 	
-	public void handleLinkedList(IObject linkedListObj) {
+	public ListObj handleLinkedList(IObject linkedListObj) {
+		try {
+			int[] listChildren = snapshot.getImmediateDominatedIds(linkedListObj.getObjectId());
 		
+		
+			for(Integer listChild : listChildren) {
+			
+				if(snapshot.getObject(listChild).getTechnicalName().startsWith("java.util.LinkedList$Entry @")) {
+				
+					int[] objectChildren = snapshot.getImmediateDominatedIds(listChild);
+					if(objectChildren.length != 0) {
+						ListObj listObj = new ListObj(new Row(linkedListObj));
+						listObj.setElements(objectChildren);
+						
+						int firstEntryObjId = snapshot.getImmediateDominatedIds(objectChildren[0])[0];
+						Row firstChildElem = new Row(snapshot.getObject(firstEntryObjId));
+						listObj.setFirstElem(firstChildElem);
+						
+						return listObj;
+					}
+						
+				}
+			}
+		} catch (SnapshotException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	public void handleTreeMap(IObject treeMapObj) {
@@ -143,15 +156,17 @@ public class UserObjectExtender {
 	public void handleTreeSet(IObject treeSetObj) {
 	
 	}
-	
-	public List<Row> subDominateObjs(int dominatorId) {
+
+	/*
+	public List<Row> subDominateObjsWithoutSort(int dominatorId) {
 		List<Row> rows = new ArrayList<Row>();
 		
 		try {
 			int[] objectIds = snapshot.getImmediateDominatedIds(dominatorId);
 			
 			for(int objectId : objectIds) {
-				IObject obj = snapshot.getObject(objectId);
+			
+				IObject obj = snapshot.getObject(objectId); 
 				rows.add(new Row(obj));
 			}
 			
@@ -160,55 +175,93 @@ public class UserObjectExtender {
 			e.printStackTrace();
 		}
 		
-		Collections.sort(rows);
+		// Collections.sort(rows);
 		
 		return rows;
 	}
+	*/
+	
+	/*
+	public int[] subDominateObjIds(int dominatorId) throws SnapshotException {
+		return snapshot.getImmediateDominatedIds(dominatorId);
+	}
+	*/
 }
 
 // represent the list object (e.g., ArrayList, LinkedList)
 class ListObj {
 	// type of this data structure (e.g., ArrayList)
-	String dsName;
+	// String dsName;
 
 	// e.g., T in the ArrayList<T>()
-	String elementType;
+	// String elementType;
 	
-	List<Row> elements;
+	private Row listObj;
 	
-	public void setElements(List<Row> elements) {
-		this.elements = elements;
+	private int[] elementIds;
+	private Row firstElem;
+	
+	public ListObj(Row listObj) {
+		this.listObj = listObj;
+	}
+	
+	public void setElements(int[] elementIds) {
+		this.elementIds = elementIds;
+	}
+	
+	public void setFirstElem(Row firstElem) {
+		this.firstElem = firstElem;
 	}
 	
 	public int size() {
-		return elements.size();
+		return elementIds.length;
+	}
+	
+	public void display() {
+		if(elementIds == null || elementIds.length == 0)
+			return;
+		
+		System.out.println("\n--------------------List Object--------------------------");
+		System.out.println("[listObj] " + listObj);
+		System.out.println("[element] " + firstElem);
+		System.out.println("[length]  " + new DecimalFormat(",###").format(elementIds.length));
+		System.out.println("--------------------------------------------------\n");
 	}
 }
 
 // represent the map object (e.g., HashMap, TreeMap)
 class MapObj {
 	// type of this data structure
-	String dsName;
-	
+	// String dsName;
+	private Row mapObj;
 	// key and value in the Map
-	List<Row> keys;
-	List<Row> values;
+	private Row key;
+	private Row value;
+	private int[] elementIds;
 	
-	public MapObj() {
-		keys = new ArrayList<Row>();
-		values = new ArrayList<Row>();
+	public MapObj(Row mapObj) {
+		this.mapObj = mapObj;
 	}
 	
-	public void addKey(IObject obj) {
-		keys.add(new Row(obj));
+	public void setKey(IObject obj) {
+		key = new Row(obj);
 	}
 	
-	public void addValue(IObject obj) {
-		values.add(new Row(obj));
+	public void setValue(IObject obj) {
+		value = new Row(obj);
 	}
 	
-	public int size() {
-		return keys.size();
+	public void setElementIds(int[] elementIds) {
+		this.elementIds = elementIds;
 	}
-
+	
+	public void display() {
+		
+		System.out.println("\n--------------------Map Object------------------------");
+		System.out.println("[MapObj] " + mapObj);
+		System.out.println("[key]    " + key);
+		System.out.println("[value]  " + value);
+		System.out.println("[length] " + new DecimalFormat(",###").format(elementIds.length));
+		System.out.println("--------------------------------------------------\n");
+	}
 }

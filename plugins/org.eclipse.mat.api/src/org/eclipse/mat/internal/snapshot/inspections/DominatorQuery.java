@@ -149,11 +149,33 @@ public class DominatorQuery implements IQuery
 			//tAnalyzer.threadOverview();
             tAnalyzer.findStacks(dominatorIds, threadNames);
             */
+            String phase = null;
+            String path = snapshot.getSnapshotInfo().getPath();
             
-            DefaultTree dt = new DefaultTree(snapshot, roots, elements);
-            DiagOOM tool = new DiagOOM(snapshot, dt, "reduce", 5.0f);
-            tool.classifyObjects();
-            // tool.findReferencedThreads();
+            if(path.contains("Pig MapJoin-6") || path.contains("Mahout classifier-3")) {
+            	phase = "map";
+            }
+            else if(path.contains("Count(distinct)-mapper-9")) {
+            	phase = "spill";
+            }
+            else if(path.contains("ReduceTask-11") || path.contains("PigGroupBy-largeSoftBuffer-PigJoin")) {
+            	phase = "shuffle";
+            }
+            else if(path.contains("Count(distinct)-reducer-10")) {
+            	phase = "shuffle";
+            }
+            else if(path.contains("ReduceJoin-no-reducebuffer") || path.contains("ReduceJoin-reducebuffer")) {
+            	phase = "reduce";
+            }
+            
+            if(phase != null) {
+            	DefaultTree dt = new DefaultTree(snapshot, roots, elements);
+                
+                DiagOOM tool = new DiagOOM(snapshot, dt, phase, 5.0f);
+                tool.classifyObjects();
+                //tool.findReferencedThreads();
+            }
+            
             //added end
             return new DefaultTree(snapshot, roots, elements);
         }

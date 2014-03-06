@@ -1,5 +1,6 @@
 package cn.ac.iscas.oomr.classifier;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
@@ -25,6 +26,7 @@ public class MergePhaseAnalyzer {
 	public MergePhaseAnalyzer(ISnapshot snapshot, List<Row> largeDominators) {
 		this.snapshot = snapshot;
 		this.largeDominators = largeDominators;
+		toDeleteObjIds = new HashSet<Integer>();
 	}
 	
 	
