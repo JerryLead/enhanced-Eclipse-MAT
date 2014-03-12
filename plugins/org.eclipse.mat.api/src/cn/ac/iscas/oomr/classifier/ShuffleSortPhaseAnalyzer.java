@@ -20,6 +20,8 @@ public class ShuffleSortPhaseAnalyzer {
 	private List<Row> largeDominators;
 	private Set<Integer> toDeleteObjIds;
 	
+
+	
 	// byte[] 
 	// in org.apache.hadoop.mapred.ReduceTask$ReduceCopier$MapOutputCopier @ 0xd4341920  MapOutputCopier attempt_***
 	private List<Row> segmentsInCopy;
@@ -41,6 +43,9 @@ public class ShuffleSortPhaseAnalyzer {
 	private Row comparatorSegment;
 	private Row minSegment;
 
+	// used to check whether keySegment, comparatorSegment and minSegment exist in MergeQueue
+	private Set<Integer> segmentIdSet;
+	
 	public ShuffleSortPhaseAnalyzer(ISnapshot snapshot, List<Row> largeDominators) {
 		this.snapshot = snapshot;
 		this.largeDominators = largeDominators;
@@ -49,6 +54,8 @@ public class ShuffleSortPhaseAnalyzer {
 		segmentsInCopy = new ArrayList<Row>();
 		segmentsInList = new ArrayList<Row>();
 		segmentsInMerge = new ArrayList<Row>();
+		
+		segmentIdSet = new HashSet<Integer>();
 	}
 
 	/**
@@ -110,6 +117,8 @@ public class ShuffleSortPhaseAnalyzer {
 			if(r.getClassName().startsWith("byte[")) {
 				r.setFrameObjName(mapOutputCopier.getDisplayName());
 				segmentsInCopy.add(r);
+				
+				segmentIdSet.add(r.getObjectId());
 				break;
 			}
 		}
@@ -160,6 +169,8 @@ public class ShuffleSortPhaseAnalyzer {
 												if(byteRef.getClassName().startsWith("byte[")) {
 													byteRef.setFrameObjName(mapOutput.getClassName());
 													segmentsInList.add(byteRef);
+													
+													segmentIdSet.add(byteRef.getObjectId());
 												}
 											}
 											
@@ -248,6 +259,8 @@ public class ShuffleSortPhaseAnalyzer {
 													segmentsInMerge.add(segmentInMerge);
 													toDeleteObjIds.add(bufferRef.getObjectId());
 													toDeleteObjIds.add(heapRef.getObjectId());
+													
+													segmentIdSet.add(bufferRef.getObjectId());
 												}
 											}
 										}
@@ -382,39 +395,62 @@ public class ShuffleSortPhaseAnalyzer {
 	}
 	
 	private void displayFrameworkObjs() {
-		System.out.println("|-------------------Framework objects in shuffle & sort phase-------------------|");
-		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
-		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+		System.out.println("## OOM in shuffle & sort phase\n");
 		
-		System.out.println("[SegmentsInCopy] => ");
-		for(Row r : segmentsInCopy) 
-			System.out.println(r);
+		System.out.println("### Framework Objects\n");
 		
-		System.out.println();
-		System.out.println("[SegmentsInList] => ");
-		for(Row r : segmentsInList) 
-			System.out.println(r);
 		
-		System.out.println();
-		System.out.println("[SegmentsInMerge] => ");
-		for(Row r : segmentsInMerge) 
-			System.out.println(r);
+		System.out.println("#### [SegmentsInCopy] => \n");
+		if(!segmentsInCopy.isEmpty()) {	
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+			for(Row r : segmentsInCopy) 
+				System.out.println(r);
+		}
 		
-		if(keySegment != null) {
+
+		System.out.println("\n#### [SegmentsInList] => \n");
+		if(!segmentsInList.isEmpty()) {
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+			for(Row r : segmentsInList) 
+				System.out.println(r);
+		}
+		
+	
+		System.out.println("\n#### [SegmentsInMerge] => \n");
+		if(!segmentsInMerge.isEmpty()) {
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+			for(Row r : segmentsInMerge) 
+				System.out.println(r);
+		}
+		
+		
+		if(keySegment != null && !segmentIdSet.contains(keySegment.getObjectId())) {
 			System.out.println();
-			System.out.println("[keySegment] => ");
+			System.out.println("\n#### [keySegment] => \n");
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 			System.out.println(keySegment);
+			
+			segmentIdSet.add(keySegment.getObjectId());
 		}
 		
-		if(comparatorSegment != null) {
-			System.out.println();
-			System.out.println("[comparatorSegment] => ");
+		if(comparatorSegment != null && !segmentIdSet.contains(comparatorSegment.getObjectId())) {
+			System.out.println("\n#### [comparatorSegment] => \n");
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 			System.out.println(comparatorSegment);
+			
+			segmentIdSet.add(comparatorSegment.getObjectId());
 		}
 		
-		if(minSegment != null) {
+		if(minSegment != null && !segmentIdSet.contains(minSegment.getObjectId())) {
 			System.out.println();
-			System.out.println("[minSegment] => ");
+			System.out.println("\n#### [minSegment] => \n");
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 			System.out.println(minSegment);
 		}
 		

@@ -20,6 +20,7 @@ import org.eclipse.mat.snapshot.model.NamedReference;
 import org.eclipse.mat.util.VoidProgressListener;
 
 import cn.ac.iscas.oomr.dominatortree.Row;
+import cn.ac.iscas.oomr.main.UserObj;
 import cn.ac.iscas.oomr.thread.path.Path;
 import cn.ac.iscas.oomr.thread.path.SinglePath;
 
@@ -31,8 +32,10 @@ public class ThreadAnalyzer {
 	private List<?> threadObjList; // objects of running threads (overview)
 	private IResultTree result;
 	
+	private List<SinglePath> premap = new ArrayList<SinglePath>();
 	private List<SinglePath> map = new ArrayList<SinglePath>();
 	private List<SinglePath> combine = new ArrayList<SinglePath>();
+	private List<SinglePath> prereduce = new ArrayList<SinglePath>();
 	private List<SinglePath> reduce = new ArrayList<SinglePath>();
 	private List<SinglePath> others = new ArrayList<SinglePath>();
 	
@@ -218,7 +221,7 @@ public class ThreadAnalyzer {
 		
 	}
 
-	public Map<Integer, Path> findReferencedThreads(List<Row> userObjs) {
+	public Map<Integer, Path> findReferencedThreads(List<UserObj> userObjs) {
 		String[] threadNames = null;
 		
 		if(phase.equals("map") || phase.equals("spill") || phase.equals("merge")) {
@@ -236,9 +239,9 @@ public class ThreadAnalyzer {
 		}
 		
 		else if(phase.equals("reduce")) {
-			threadNames = new String[2];
+			threadNames = new String[1];
 			threadNames[0] = "main";
-			threadNames[1] = "Readahead";
+			//threadNames[1] = "Readahead";
 		}
 		
 			
@@ -257,6 +260,19 @@ public class ThreadAnalyzer {
 	private Map<Integer, Path> obtainDominatorToPath() {
 		
 		Map<Integer, Path> dominatorToPath = new HashMap<Integer, Path>();
+		
+		for(SinglePath sp : premap) {
+			int dominatorId = sp.getDominatorId();
+			
+			if(!dominatorToPath.containsKey(dominatorId)) {
+				Path path = new Path(dominatorId);
+				path.addPreMapPath(sp);
+				dominatorToPath.put(dominatorId, path);
+			}
+			else {
+				dominatorToPath.get(dominatorId).addPreMapPath(sp);
+			}
+		}
 		
 		for(SinglePath sp : map) {
 			int dominatorId = sp.getDominatorId();
@@ -281,6 +297,19 @@ public class ThreadAnalyzer {
 			}
 			else {
 				dominatorToPath.get(dominatorId).addCombinePath(sp);
+			}
+		}
+		
+		for(SinglePath sp : prereduce) {
+			int dominatorId = sp.getDominatorId();
+			
+			if(!dominatorToPath.containsKey(dominatorId)) {
+				Path path = new Path(dominatorId);
+				path.addPreReducePath(sp);
+				dominatorToPath.put(dominatorId, path);
+			}
+			else {
+				dominatorToPath.get(dominatorId).addPreReducePath(sp);
 			}
 		}
 		
@@ -314,10 +343,12 @@ public class ThreadAnalyzer {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void findStacks(List<Row> userObjs, Object threadObj) {
+	private void findStacks(List<UserObj> userObjs, Object threadObj) {
+		Set<Integer> foundObjSet = new HashSet<Integer>();
+		
 		dominators = new HashSet<Integer>();
-		for(Row r : userObjs)
-			dominators.add(r.getObjectId());
+		for(UserObj r : userObjs)
+			dominators.add(r.getUserObj().getObjectId());
 
 		// get objectId of threadObj
 		int threadObjId = result.getContext(threadObj).getObjectId();
@@ -338,14 +369,26 @@ public class ThreadAnalyzer {
 			for (int i = stackFrames.size() - 1; i > 0; i--) {
 				IStackFrame sf = stackFrames.get(i);
 				
-				if(method.equals("others")) {
-					if(sf.getText().contains(".map("))
-						method = "map";
-					if(sf.getText().contains(".combine("))
-						method = "combine";
-					if(sf.getText().contains(".reduce("))
+				// if(method.equals("others")) {
+				String sfText = sf.getText();
+				
+				if(sfText.contains(".runNewMapper(") || sfText.contains(".runOldMapper("))
+					method = "premap";
+				
+				else if(sfText.contains(".map("))
+					method = "map";
+				else if(sfText.contains("NewCombinerRunner.combine(") || sfText.contains("OldCombinerRunner.combine("))
+					method = "combine";
+				
+				else if(sfText.contains(".runOldReducer(") || sfText.contains(".runNewReducer(")) 
+					method = "prereduce";
+				else if(sfText.contains(".reduce(")) {
+					if(!method.equals("combine"))
 						method = "reduce";
 				}
+					
+				
+				// }
 				
 				// get the in-memory objects in each stack
 				int[] localObjectIds = sf.getLocalObjectsIds();
@@ -373,12 +416,20 @@ public class ThreadAnalyzer {
 				for(SinglePath sp : localObjToDominators) {
 					sp.setThreadObjId(threadObjId);
 					sp.setStackframe(sf);
+					
+					foundObjSet.add(sp.getDominatorId());
 				}
 				
+				
+				
+				if(method.equals("premap"))
+					premap.addAll(localObjToDominators);
 				if(method.equals("map"))
 					map.addAll(localObjToDominators);
 				else if(method.equals("combine"))
 					combine.addAll(localObjToDominators);
+				else if(method.equals("prereduce"))
+					prereduce.addAll(localObjToDominators);
 				else if(method.equals("reduce"))
 					reduce.addAll(localObjToDominators);
 				else
@@ -388,6 +439,22 @@ public class ThreadAnalyzer {
 			}
 		}
 		
+		for(UserObj r : userObjs) {
+			if(foundObjSet.contains(r.getUserObj().getObjectId())) {
+				IContextObject co = result.getContext(threadObj);
+				try {
+					IObject obj = snapshot.getObject(co.getObjectId());
+					String tName = obj.getClassSpecificName();
+					r.setThread(tName);
+				} catch (SnapshotException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+				
+		}
+			
 	}
 
 /*	// display the basic information of running threads
@@ -544,7 +611,7 @@ public class ThreadAnalyzer {
 	}
 
 	public void display(Map<Integer, Path> dominatorsToThreads) {
-		System.out.println("|------------------------ dominators => Threads/func() ------------------------|");
+		System.out.println("\n### Dominators => Threads and code() \n");
 		
 		for(Entry<Integer, Path> dt : dominatorsToThreads.entrySet()) {
 			int dominatorId = dt.getKey();
@@ -552,7 +619,7 @@ public class ThreadAnalyzer {
 				IObject dominator = snapshot.getObject(dominatorId);
 				Path p = dt.getValue();
 				
-				System.out.println("[" + dominator.getTechnicalName() + "] =>");
+				System.out.println("[" + dominator.getTechnicalName() + "] =>\n");
 				p.display(snapshot);
 				System.out.println();
 				

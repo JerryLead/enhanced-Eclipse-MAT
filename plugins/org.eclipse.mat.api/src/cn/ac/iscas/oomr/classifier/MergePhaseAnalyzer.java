@@ -108,7 +108,9 @@ public class MergePhaseAnalyzer {
 	
 	public void displayFrameworkObjs() {
 		
-		System.out.println("|-------------------Framework objects in map phase-------------------|");
+		System.out.println("## OOM in merge phase\n");
+		
+		System.out.println("\n### Framework objects\n");
 		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
 		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 		

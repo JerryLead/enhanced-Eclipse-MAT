@@ -173,7 +173,9 @@ public class DominatorQuery implements IQuery
                 
                 DiagOOM tool = new DiagOOM(snapshot, dt, phase, 5.0f);
                 tool.classifyObjects();
-                //tool.findReferencedThreads();
+                tool.findReferencedThreads();
+                tool.displayUserObjects();
+                tool.displayStackTrace();
             }
             
             //added end

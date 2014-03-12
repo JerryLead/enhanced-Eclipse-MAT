@@ -31,8 +31,8 @@ public class DiagOOM {
 	
 	// results
 	// private List<Row> frameworkObjs;
-	private List<Row> userObjs;
-	
+	// private List<Row> userObjs;
+	private List<UserObj> userObjs;
 	// hooks of heap dump and dominator objects
 	private ISnapshot snapshot;
 	private IResultTree dominatorRootTree;
@@ -42,6 +42,9 @@ public class DiagOOM {
 	
 	// object that are smaller than sizeLimit will be neglected
 	private float sizeLimitMB;
+	
+	private ThreadAnalyzer threadAnalyzer;
+	private Map<Integer, Path> dominatorsToThreads;
 	
 	public DiagOOM(ISnapshot snapshot, IResultTree dominatorRootTree, String phase, float sizeLimitMB) {
 		this.snapshot = snapshot;
@@ -55,22 +58,22 @@ public class DiagOOM {
 		// get raw memory-consuming objects
 		List<Row> largeDominators = getLargeDominators(sizeLimitMB);
 		
-		userObjs = filterFrameworkObjs(largeDominators);
-		displayLargeDominators(userObjs, "User objects");
+		List<Row> rawUserObjs = filterFrameworkObjs(largeDominators);
+		// displayLargeDominators(userObjs, "User objects");
 		
-		refineUserObjects();
+		userObjs = refineUserObjects(rawUserObjs);
 	}
 	
 	// find the referenced threads/code() of each user object
 	public void findReferencedThreads() {
-		if(!userObjs.isEmpty())
+		if(userObjs != null && !userObjs.isEmpty())
 			findReferencedThreads(userObjs);
 	}
 	
 	// explore the details of individual object (e.g., explore the elements in ArrayList)
-	public void refineUserObjects() {
-		UserObjectExtender uExtender = new UserObjectExtender(snapshot, userObjs);
-		uExtender.extendUserObjs();
+	public List<UserObj> refineUserObjects(List<Row> rawUserObjs) {
+		UserObjectExtender uExtender = new UserObjectExtender(snapshot, rawUserObjs);
+		return uExtender.extendUserObjs();
 	}
 	/**
 	 * @param mb Object which is larger than mb will be selected
@@ -109,18 +112,24 @@ public class DiagOOM {
 		return largeDominators;
 	}
 	
-	public void findReferencedThreads(List<Row> userObjs) {
-		ThreadAnalyzer threadAnaly = new ThreadAnalyzer(snapshot, phase);
-		Map<Integer, Path> dominatorsToThreads = threadAnaly.findReferencedThreads(userObjs);
-		threadAnaly.display(dominatorsToThreads);
+	public void findReferencedThreads(List<UserObj> userObjs) {
+		threadAnalyzer = new ThreadAnalyzer(snapshot, phase);
+		dominatorsToThreads = threadAnalyzer.findReferencedThreads(userObjs);
+		//threadAnaly.display(dominatorsToThreads);
+		for(UserObj userObj : userObjs) {
+			if(dominatorsToThreads.containsKey(userObj.getUserObj().getObjectId())) 
+				userObj.setPath(dominatorsToThreads.get(userObj.getUserObj().getObjectId()));
+			
+		}
 	}
 	
+	/*
 	public void displayLargeDominators(List<Row> rows, String name) {
 		if(rows == null || rows.isEmpty())
 			return;
 		
-		System.out.println("|------------------------- " + name + " -------------------------|");
-		System.out.println("| Class name \t| shallowHeap \t| retainedHeap |");
+		System.out.println("### " + name + "\n");
+		System.out.println("| User object \t| shallowHeap \t| retainedHeap |");
 		System.out.println("|:-------------- | --------------: | --------------:|");
 		
 		for (Row row : rows)
@@ -128,5 +137,23 @@ public class DiagOOM {
 		System.out.println();
 		System.out.println();
 	}
+	*/
 	
+	public void displayUserObjects() {
+		if(userObjs == null || userObjs.isEmpty())
+			return;
+		System.out.println("### User Objects\n");
+		System.out.println("| User object | shallow heap | retained heap | length | inner object | inner size | threads | code() |");
+		System.out.println("|:------------| ------------:| -------------:| ------:|:------------ | ----------:| :------ | :------| ");
+		
+		for(UserObj userObj : userObjs) {
+			userObj.display();
+		}
+	}
+	
+	public void displayStackTrace() {
+		if(threadAnalyzer != null && dominatorsToThreads != null)
+			threadAnalyzer.display(dominatorsToThreads);
+			
+	}
 }

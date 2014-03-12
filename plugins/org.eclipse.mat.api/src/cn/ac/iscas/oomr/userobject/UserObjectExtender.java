@@ -1,6 +1,7 @@
 package cn.ac.iscas.oomr.userobject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.mat.SnapshotException;
@@ -9,44 +10,89 @@ import org.eclipse.mat.snapshot.model.IObject;
 import org.eclipse.mat.snapshot.model.NamedReference;
 
 import cn.ac.iscas.oomr.dominatortree.Row;
+import cn.ac.iscas.oomr.main.UserObj;
 
 public class UserObjectExtender {
 
 	private ISnapshot snapshot;
-	private List<Row> userObjs;
+	private List<Row> rawUserObjs;
+	private List<UserObj> userObjs;
 	
-	public UserObjectExtender(ISnapshot snapshot, List<Row> userObjs) {
+	public UserObjectExtender(ISnapshot snapshot, List<Row> rawUserObjs) {
 		this.snapshot = snapshot;
-		this.userObjs = userObjs;
+		this.rawUserObjs = rawUserObjs;
+		userObjs = new ArrayList<UserObj>();
 	}
 
-	public void extendUserObjs() {
+	public List<UserObj> extendUserObjs() {
 		try {
-			for(Row userObj : userObjs) {
-				String className = userObj.getClassName();
+			for(Row rawUserObj : rawUserObjs) {
+				UserObj uObj = new UserObj(rawUserObj);
+				String className = rawUserObj.getClassName();
 				
 				if(className.startsWith("java.util.ArrayList @")) {
-					ListObj listObj = handleArrayList(snapshot.getObject(userObj.getObjectId()));
-					listObj.display();
+					ListObj listObj = handleArrayList(snapshot.getObject(rawUserObj.getObjectId()));
+					// listObj.display();
+
+					uObj.setInnerObj(listObj.getFirstElem());
+					uObj.setLength(listObj.size());
 				}
 				
 				else if(className.startsWith("java.util.HashMap @")) {
-					MapObj mapObj = handleHashMap(snapshot.getObject(userObj.getObjectId()));
-					mapObj.display();
+					MapObj mapObj = handleHashMap(snapshot.getObject(rawUserObj.getObjectId()));
+					
+					// mapObj.display();
+					uObj.setKey(mapObj.getKey());
+					uObj.setValue(mapObj.getValue());
+					uObj.setLength(mapObj.size());
 				}
 				
 				else if(className.startsWith("java.util.LinkedList @")) {
-					ListObj listObj = handleLinkedList(snapshot.getObject(userObj.getObjectId()));
-					listObj.display();
+					ListObj listObj = handleLinkedList(snapshot.getObject(rawUserObj.getObjectId()));
+					
+					// listObj.display();
+					uObj.setInnerObj(listObj.getFirstElem());
+					uObj.setLength(listObj.size());
+				}
+				
+				else if(className.startsWith("java.lang.Object[")) {
+					ArrayObj arrayObj = handleArrayObject(snapshot.getObject(rawUserObj.getObjectId()));
+					
+					// arrayObj.display();
+					uObj.setInnerObj(arrayObj.getFirstElem());
+					uObj.setLength(arrayObj.size());
 				}
 					
+				userObjs.add(uObj);
+			}
+			
+			return userObjs;
+		} catch (SnapshotException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public ArrayObj handleArrayObject(IObject arrayObj) {
+		try {
+			int[] objectChildren = snapshot.getImmediateDominatedIds(arrayObj.getObjectId());
+		
+			if(objectChildren.length != 0) {
+				ArrayObj listObj = new ArrayObj(new Row(arrayObj));
+				listObj.setElements(objectChildren);
+				listObj.setFirstElem(new Row(snapshot.getObject(objectChildren[0])));
+			
+				return listObj;
 			}
 		} catch (SnapshotException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
-	
+
 	public ListObj handleArrayList(IObject arrayListObj) {
 
 		try {
@@ -188,6 +234,45 @@ public class UserObjectExtender {
 	*/
 }
 
+// represent java.lang.Object[]
+class ArrayObj {
+	private Row arrayObj;
+	
+	private int[] elementIds;
+	private Row firstElem;
+	
+	public ArrayObj(Row arrayObj) {
+		this.arrayObj = arrayObj;
+	}
+	
+	public void setElements(int[] elementIds) {
+		this.elementIds = elementIds;
+	}
+	
+	public void setFirstElem(Row firstElem) {
+		this.firstElem = firstElem;
+	}
+	
+	public int size() {
+		return elementIds.length;
+	}
+	public Row getFirstElem() {
+		return firstElem;
+	}
+	
+	public void display() {
+		if(elementIds == null || elementIds.length == 0)
+			return;
+		
+		System.out.println("\n### java.lang.Object[T] [length = " + new DecimalFormat(",###").format(elementIds.length) + "]");
+		System.out.println("| Attribute \t| Class name \t| shallowHeap \t| retainedHeap \t|");
+		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+		System.out.println("|arrayObj \t" + arrayObj);
+		System.out.println("|element \t" + firstElem);
+		System.out.println();
+	}
+}
+
 // represent the list object (e.g., ArrayList, LinkedList)
 class ListObj {
 	// type of this data structure (e.g., ArrayList)
@@ -217,15 +302,20 @@ class ListObj {
 		return elementIds.length;
 	}
 	
+	public Row getFirstElem() {
+		return firstElem;
+	}
+	
 	public void display() {
 		if(elementIds == null || elementIds.length == 0)
 			return;
 		
-		System.out.println("\n--------------------List Object--------------------------");
-		System.out.println("[listObj] " + listObj);
-		System.out.println("[element] " + firstElem);
-		System.out.println("[length]  " + new DecimalFormat(",###").format(elementIds.length));
-		System.out.println("--------------------------------------------------\n");
+		System.out.println("\n### List<T> object [length = " + new DecimalFormat(",###").format(elementIds.length) + "]");
+		System.out.println("| Attribute \t| Class name \t| shallowHeap \t| retainedHeap \t|");
+		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+		System.out.println("|listObj \t" + listObj);
+		System.out.println("|element \t" + firstElem);
+		System.out.println();
 	}
 }
 
@@ -255,13 +345,26 @@ class MapObj {
 		this.elementIds = elementIds;
 	}
 	
+	public Row getKey() {
+		return key;
+	}
+	
+	public Row getValue() {
+		return value;
+	}
+	
+	public int size() {
+		return elementIds.length;
+	}
+	
 	public void display() {
 		
-		System.out.println("\n--------------------Map Object------------------------");
-		System.out.println("[MapObj] " + mapObj);
-		System.out.println("[key]    " + key);
-		System.out.println("[value]  " + value);
-		System.out.println("[length] " + new DecimalFormat(",###").format(elementIds.length));
-		System.out.println("--------------------------------------------------\n");
+		System.out.println("\n### Map<K,V> object [length = " + new DecimalFormat(",###").format(elementIds.length) + "]");
+		System.out.println("| Attribute \t| Class name \t| shallowHeap \t| retainedHeap \t|");
+		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+		System.out.println("| MapObject \t" + mapObj);
+		System.out.println("| key \t" + key);
+		System.out.println("| value \t" + value);
+		System.out.println();
 	}
 }

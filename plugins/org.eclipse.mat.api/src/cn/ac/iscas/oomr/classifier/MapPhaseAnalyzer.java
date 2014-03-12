@@ -115,8 +115,9 @@ public class MapPhaseAnalyzer {
 	
 	
 	public void displayFrameworkObjs() {
+		System.out.println("## OOM in map phase\n");
 		
-		System.out.println("|-------------------Framework objects in map phase-------------------|");
+		System.out.println("\n### Framework Objects\n");
 		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
 		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 		

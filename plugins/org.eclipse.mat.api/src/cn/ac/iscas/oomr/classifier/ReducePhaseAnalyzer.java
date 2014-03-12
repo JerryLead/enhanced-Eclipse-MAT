@@ -26,12 +26,17 @@ public class ReducePhaseAnalyzer {
 	private Row comparatorSegment;
 	private Row minSegment;
 
+	// used to check whether keySegment, comparatorSegment and minSegment exist in MergeQueue
+	private Set<Integer> segmentIdSet;
+		
 	public ReducePhaseAnalyzer(ISnapshot snapshot, List<Row> largeDominators) {
 		this.snapshot = snapshot;
 		this.largeDominators = largeDominators;
 		this.toDeleteObjIds = new HashSet<Integer>();
 		
 		segmentsInBuffer = new ArrayList<Row>();
+		
+		segmentIdSet = new HashSet<Integer>();
 	}
 	
 	
@@ -98,6 +103,8 @@ public class ReducePhaseAnalyzer {
 													segmentsInBuffer.add(segmentInMerge);
 													toDeleteObjIds.add(bufferRef.getObjectId());
 													toDeleteObjIds.add(heapRef.getObjectId());
+													
+													segmentIdSet.add(bufferRef.getObjectId());
 												}
 											}
 										}
@@ -209,30 +216,40 @@ public class ReducePhaseAnalyzer {
 	}
 
 	private void displayFrameworkObjs() {
-		System.out.println("|-------------------Framework objects in shuffle & sort phase-------------------|");
-		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
-		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+		System.out.println("## OOM in reduce phase\n");
 		
+		System.out.println("\n### Framework Objects\n");
 		
-		System.out.println("[SegmentsInBuffer] => ");
-		for(Row r : segmentsInBuffer) 
-			System.out.println(r);
+		System.out.println("#### [SegmentsInBuffer] => \n");
+		if(!segmentsInBuffer.isEmpty()) {
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
+			for(Row r : segmentsInBuffer) 
+				System.out.println(r);
+		}
 		
-		if(keySegment != null) {
-			System.out.println();
-			System.out.println("[keySegment] => ");
+		if(keySegment != null && !segmentIdSet.contains(keySegment.getObjectId())) {
+			System.out.println("\n#### [keySegment] => \n");
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 			System.out.println(keySegment);
+			
+			segmentIdSet.add(keySegment.getObjectId());
 		}
 		
-		if(comparatorSegment != null) {
-			System.out.println();
-			System.out.println("[comparatorSegment] => ");
+		if(comparatorSegment != null && !segmentIdSet.contains(comparatorSegment.getObjectId())) {
+			System.out.println("\n#### [comparatorSegment] => \n");
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 			System.out.println(comparatorSegment);
+			
+			segmentIdSet.add(comparatorSegment.getObjectId());
 		}
 		
-		if(minSegment != null) {
-			System.out.println();
-			System.out.println("[minSegment] => ");
+		if(minSegment != null && !segmentIdSet.contains(minSegment.getObjectId())) {
+			System.out.println("\n#### [minSegment] => \n");
+			System.out.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 			System.out.println(minSegment);
 		}
 		
