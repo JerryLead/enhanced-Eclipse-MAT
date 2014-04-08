@@ -1,5 +1,6 @@
 package cn.ac.iscas.oomr.thread.path;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,17 +86,179 @@ public class Path {
 		return sb.toString();
 	}
 	
+	public void output(ISnapshot snapshot, PrintWriter writer) {
+		try {
+			 
+			int maxItems = 20;
+			
+			int i = 0;
+			if(!map.isEmpty()) {
+				String threadName = snapshot.getObject(map.get(0).getThreadObjId()).getClassSpecificName();
+				
+				writer.println("\t|------ in map() in " + threadName + " ------|");
+				
+				String stackFrame = map.get(0).getStackframe().getText();
+				writer.println("\t" + stackFrame);
+				
+				for(SinglePath sp : map) {
+					if(i++ == maxItems)
+						break;
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						writer.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					// System.out.println("\t  " + "--------------------------------------------------------");	
+					for(Integer id : sp.getPath())
+						writer.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
+					writer.println();
+				}
+			}
+			
+			i = 0;
+			if(!combine.isEmpty()) {
+				String threadName = snapshot.getObject(combine.get(0).getThreadObjId()).getClassSpecificName();
+				
+				writer.println("\t|------ in combine() in " + threadName + " ------|");
+				
+				String stackFrame = combine.get(0).getStackframe().getText();
+				writer.println("\t" + stackFrame);
+				
+				for(SinglePath sp : combine) {
+					if(i++ == maxItems)
+						break;
+					
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						writer.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					
+					
+					// System.out.println("\t  " + "--------------------------------------------------------");	
+					
+					for(Integer id : sp.getPath()) 
+						writer.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");
+					writer.println();			
+				}
+			}
+			
+			i = 0;
+			if(!reduce.isEmpty()) {
+				String threadName = snapshot.getObject(reduce.get(0).getThreadObjId()).getClassSpecificName();
+				
+				writer.println("\t|------ in reduce() in " + threadName + " ------|");
+				
+				String stackFrame = reduce.get(0).getStackframe().getText();
+				writer.println("\t" + stackFrame);
+				
+				
+				for(SinglePath sp : reduce) {
+					if(i++ == maxItems)
+						break;
+					
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						writer.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					// System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");
+					
+					for(Integer id : sp.getPath()) 
+						writer.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
+					writer.println();
+				}
+			}
+			
+			i = 0;
+			if(!premap.isEmpty()) {
+				String threadName = snapshot.getObject(premap.get(0).getThreadObjId()).getClassSpecificName();
+				
+				writer.println("\t|------ in premap() in " + threadName + " ------|");
+				
+				String stackFrame = premap.get(0).getStackframe().getText();
+				writer.println("\t" + stackFrame);
+				
+				
+				for(SinglePath sp : premap) {
+					if(i++ == maxItems)
+						break;
+					
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						writer.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					// System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");	
+					for(Integer id : sp.getPath())
+						writer.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
+					writer.println();
+				}
+			}
+			
+			i = 0;
+			if(!prereduce.isEmpty()) {
+				String threadName = snapshot.getObject(prereduce.get(0).getThreadObjId()).getClassSpecificName();
+				
+				writer.println("\t|------ in prereduce() in " + threadName + " ------|");
+				
+				String stackFrame = prereduce.get(0).getStackframe().getText();
+				writer.println("\t" + stackFrame);
+				
+				for(SinglePath sp : prereduce) {
+					if(i++ == maxItems)
+						break;
+					
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						writer.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					
+					// System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");	
+					for(Integer id : sp.getPath())
+						writer.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
+					writer.println();
+				}
+			}
+			/*
+			if(!others.isEmpty()) {
+				System.out.println("\t|---------------------------- in other func() ----------------------------|");
+				for(SinglePath sp : others) {
+					
+					System.out.println("\t" + sp.getStackframe().getText());
+					// System.out.println("\t  " + "--------------------------------------------------------");	
+					
+					for(Integer id : sp.getPath()) 
+						System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");
+					System.out.println();
+				}
+			}
+			*/
+		} catch (SnapshotException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void display(ISnapshot snapshot) {
 		try {
 		 
+			int maxItems = 20;
+			
 			int i = 0;
 			if(!map.isEmpty()) {
-				System.out.println("\t|---------------------------- in map() ----------------------------|");
+				String threadName = snapshot.getObject(map.get(0).getThreadObjId()).getClassSpecificName();
+				
+				System.out.println("\t|------ in map() in " + threadName + " ------|");
+				
+				String stackFrame = map.get(0).getStackframe().getText();
+				System.out.println("\t" + stackFrame);
 				
 				for(SinglePath sp : map) {
-					if(i++ == 10)
+					if(i++ == maxItems)
 						break;
-					System.out.println("\t" + sp.getStackframe().getText());
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						System.out.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
 					// System.out.println("\t  " + "--------------------------------------------------------");	
 					for(Integer id : sp.getPath())
 							System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
@@ -105,12 +268,23 @@ public class Path {
 			
 			i = 0;
 			if(!combine.isEmpty()) {
-				System.out.println("\t|----------------------------  in combine() ----------------------------|");
+				String threadName = snapshot.getObject(combine.get(0).getThreadObjId()).getClassSpecificName();
+				
+				System.out.println("\t|------ in combine() in " + threadName + " ------|");
+				
+				String stackFrame = combine.get(0).getStackframe().getText();
+				System.out.println("\t" + stackFrame);
+				
 				for(SinglePath sp : combine) {
-					if(i++ == 10)
+					if(i++ == maxItems)
 						break;
 					
-					System.out.println("\t" + sp.getStackframe().getText());
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						System.out.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					
+					
 					// System.out.println("\t  " + "--------------------------------------------------------");	
 					
 					for(Integer id : sp.getPath()) 
@@ -121,12 +295,23 @@ public class Path {
 			
 			i = 0;
 			if(!reduce.isEmpty()) {
-				System.out.println("\t|----------------------------  in reduce() ----------------------------|");
+				String threadName = snapshot.getObject(reduce.get(0).getThreadObjId()).getClassSpecificName();
+				
+				System.out.println("\t|------ in reduce() in " + threadName + " ------|");
+				
+				String stackFrame = reduce.get(0).getStackframe().getText();
+				System.out.println("\t" + stackFrame);
+				
+				
 				for(SinglePath sp : reduce) {
-					if(i++ == 10)
+					if(i++ == maxItems)
 						break;
 					
-					System.out.println("\t" + sp.getStackframe().getText());
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						System.out.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					// System.out.println("\t" + sp.getStackframe().getText());
 					// System.out.println("\t  " + "--------------------------------------------------------");
 					
 					for(Integer id : sp.getPath()) 
@@ -137,12 +322,23 @@ public class Path {
 			
 			i = 0;
 			if(!premap.isEmpty()) {
-				System.out.println("\t|---------------------------- in runmapper() before map() ----------------------------|");
+				String threadName = snapshot.getObject(premap.get(0).getThreadObjId()).getClassSpecificName();
+				
+				System.out.println("\t|------ in premap() in " + threadName + " ------|");
+				
+				String stackFrame = premap.get(0).getStackframe().getText();
+				System.out.println("\t" + stackFrame);
+				
+				
 				for(SinglePath sp : premap) {
-					if(i++ == 10)
+					if(i++ == maxItems)
 						break;
 					
-					System.out.println("\t" + sp.getStackframe().getText());
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						System.out.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					// System.out.println("\t" + sp.getStackframe().getText());
 					// System.out.println("\t  " + "--------------------------------------------------------");	
 					for(Integer id : sp.getPath())
 							System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			
@@ -152,12 +348,23 @@ public class Path {
 			
 			i = 0;
 			if(!prereduce.isEmpty()) {
-				System.out.println("\t|---------------------------- in runreducer() before reduce() ----------------------------|");
+				String threadName = snapshot.getObject(prereduce.get(0).getThreadObjId()).getClassSpecificName();
+				
+				System.out.println("\t|------ in prereduce() in " + threadName + " ------|");
+				
+				String stackFrame = prereduce.get(0).getStackframe().getText();
+				System.out.println("\t" + stackFrame);
+				
 				for(SinglePath sp : prereduce) {
-					if(i++ == 10)
+					if(i++ == maxItems)
 						break;
 					
-					System.out.println("\t" + sp.getStackframe().getText());
+					if(!sp.getStackframe().getText().equals(stackFrame)) {
+						System.out.println("\t" + sp.getStackframe().getText());
+						stackFrame = sp.getStackframe().getText();
+					}
+					
+					// System.out.println("\t" + sp.getStackframe().getText());
 					// System.out.println("\t  " + "--------------------------------------------------------");	
 					for(Integer id : sp.getPath())
 							System.out.println("\t\t" + snapshot.getObject(id).getDisplayName()+ " [" + id + "]");			

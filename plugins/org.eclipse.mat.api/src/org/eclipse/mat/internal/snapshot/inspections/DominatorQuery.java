@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.mat.internal.snapshot.inspections;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -138,44 +139,60 @@ public class DominatorQuery implements IQuery
             
             //added by Lijie Xu
             
-            
-            /*TreeAnalyzer analyzer = new TreeAnalyzer(snapshot, new DefaultTree(snapshot, roots, elements));
-            analyzer.analyze();
-            //analyzer.display(2);
-            int[] dominatorIds = analyzer.selectLargeObjects(2);
-            String[] threadNames = {"main", "SpillThread"};
-            
-            ThreadAnalyzer tAnalyzer = new ThreadAnalyzer(snapshot);
-			//tAnalyzer.threadOverview();
-            tAnalyzer.findStacks(dominatorIds, threadNames);
-            */
+           
             String phase = null;
+            
+            // e.g., /Users/xulijie/Documents/HeapDump/NewCases/PigMapJoin/mapFileBytesRead-143392768-pid-25687/mapFileBytesRead-143392768-pid-25687.hprof
             String path = snapshot.getSnapshotInfo().getPath();
             
-            if(path.contains("Pig MapJoin-6") || path.contains("Mahout classifier-3")) {
+            int loc = path.lastIndexOf('/', path.lastIndexOf('/', path.lastIndexOf('/') - 1) - 1);
+            
+            //
+            // int loc = path.lastIndexOf('/', path.lastIndexOf('/') - 1);
+            //
+            
+            String outputFile = "/Users/xulijie/Documents/DiagOOMSpace" + path.substring(loc, path.lastIndexOf('/')) + ".md";
+            
+            
+            String fileName = path.substring(path.lastIndexOf(File.pathSeparatorChar) + 1);
+            
+            
+            if(fileName.contains("mapInRecords") || fileName.contains("mapFileBytesRead") 
+            		|| fileName.contains("mCombInRecords") || fileName.contains("mapstage")) {
             	phase = "map";
             }
-            else if(path.contains("Count(distinct)-mapper-9")) {
-            	phase = "spill";
-            }
-            else if(path.contains("ReduceTask-11") || path.contains("PigGroupBy-largeSoftBuffer-PigJoin")) {
-            	phase = "shuffle";
-            }
-            else if(path.contains("Count(distinct)-reducer-10")) {
-            	phase = "shuffle";
-            }
-            else if(path.contains("ReduceJoin-no-reducebuffer") || path.contains("ReduceJoin-reducebuffer")) {
+        
+            else if(fileName.contains("rCombInRecords") || fileName.contains("redInRecords") 
+            		|| fileName.contains("redInGroups") || fileName.contains("redFileBytesRead")
+            		|| fileName.contains("reducestage")) {
             	phase = "reduce";
             }
+            
+            //
+            /*
+            if(path.contains("Count(distinct)-mapper") || path.contains("Mahout classifier"))
+            	phase = "map";
+            else if(path.contains("PigGroupBy-largeSoftBuffer-PigJoin") || path.contains("Count(distinct)-reducer")
+            		|| path.contains("ReduceJoin-no-reducebuffer") || path.contains("ReduceJoin-reducebuffer")
+            		|| path.contains("ReduceTask"))
+            	phase = "reduce";
+            */
+            //
+            
             
             if(phase != null) {
             	DefaultTree dt = new DefaultTree(snapshot, roots, elements);
                 
-                DiagOOM tool = new DiagOOM(snapshot, dt, phase, 5.0f);
+                DiagOOM tool = new DiagOOM(snapshot, dt, phase, 5.0f, outputFile);
                 tool.classifyObjects();
                 tool.findReferencedThreads();
+                
                 tool.displayUserObjects();
+                tool.outputUserObjects();
                 tool.displayStackTrace();
+                tool.outputStackTrace();
+                
+                
             }
             
             //added end

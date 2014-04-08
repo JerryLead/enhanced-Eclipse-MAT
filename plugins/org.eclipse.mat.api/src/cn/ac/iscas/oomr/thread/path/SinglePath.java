@@ -46,6 +46,7 @@ public class SinglePath {
 		this.depth = depth;
 		path = new ArrayList<Integer>(p.size());
 		path.addAll(p);
+		
 	}
 
 	public int getThreadObjId() {
@@ -80,4 +81,12 @@ public class SinglePath {
 		return dominatorId;
 	}
 
+	@Override
+	public boolean equals(Object singlePath) {
+		if(singlePath instanceof SinglePath) {
+			return path.equals(((SinglePath) singlePath).getPath());
+		}
+		return false;
+	}
+	
 }

@@ -12,6 +12,7 @@ public class Row implements Comparable<Row> {
 	private long retainedHeap;
 	
 	private String frameObjName = null;
+	private int segMapId = Integer.MAX_VALUE;
 	
 	public Row(IObject obj) {
 		objectId = obj.getObjectId();
@@ -54,6 +55,10 @@ public class Row implements Comparable<Row> {
 			return 0;
 	}
 	
+	public void setSegMapId(int segMapId) {
+		this.segMapId = segMapId;
+	}
+	
 	public String toString() {
 		DecimalFormat format = new DecimalFormat(",###");
 		
@@ -69,7 +74,12 @@ public class Row implements Comparable<Row> {
 					frameObjName = frameObjName.substring(frameObjName.lastIndexOf(".") + 1);
 			}
 				
-			return "| " + frameObjName + "\t| " + className + "\t| " + format.format(shallowHeap) + "\t| " + format.format(retainedHeap) + "\t|";
+			if(segMapId == Integer.MAX_VALUE)
+				return "| " + frameObjName + "\t| " + className + "\t| " + format.format(shallowHeap) + "\t| " 
+					+ format.format(retainedHeap) + "\t|";
+			else
+				return "| " + frameObjName + "\t| " + className + "\t| " + format.format(shallowHeap) + "\t| " 
+					+ format.format(retainedHeap) + "\t|" + segMapId + "\t|";
 		}
 			
 	}

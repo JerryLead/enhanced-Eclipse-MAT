@@ -82,8 +82,31 @@ public class UserObj {
 		
 		sb.append(thread + " | " + code + " |");
 		
+		
 		System.out.println(sb.toString());
 		
+	}
+	
+	public String toString() {
+		
+		DecimalFormat format = new DecimalFormat(",###");
+		
+		StringBuilder sb = new StringBuilder("| " + rawObj.getClassName() + " | " + format.format(rawObj.getShallowHeap())
+				+ " | " + format.format(rawObj.getRetainedHeap()) + " | " + format.format(length) + " | ");
+		if(innerObj != null)
+			sb.append(innerObj.getClassName() + " | " + format.format(innerObj.getRetainedHeap()) + " | ");
+		else if(key == null) {
+			sb.append(" | | ");
+		}
+		else {
+			sb.append("Key: " + key.getClassName() + " + Value: " + value.getClassName() + " | "
+					+ format.format(key.getRetainedHeap()) + " + " + format.format(value.getRetainedHeap()) + " | ");
+		}
+		
+		sb.append(thread + " | " + code + " |");
+		
+		
+		return sb.toString();
 	}
 }
 	

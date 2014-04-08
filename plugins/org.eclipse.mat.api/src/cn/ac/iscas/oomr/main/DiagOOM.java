@@ -1,5 +1,10 @@
 package cn.ac.iscas.oomr.main;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +12,10 @@ import org.eclipse.mat.query.IResultTree;
 import org.eclipse.mat.snapshot.ISnapshot;
 
 import cn.ac.iscas.oomr.classifier.MapPhaseAnalyzer;
+import cn.ac.iscas.oomr.classifier.MapStageAnalyzer;
 import cn.ac.iscas.oomr.classifier.MergePhaseAnalyzer;
 import cn.ac.iscas.oomr.classifier.ReducePhaseAnalyzer;
+import cn.ac.iscas.oomr.classifier.ReduceStageAnalyzer;
 import cn.ac.iscas.oomr.classifier.ShuffleSortPhaseAnalyzer;
 import cn.ac.iscas.oomr.dominatortree.Row;
 import cn.ac.iscas.oomr.dominatortree.TreeAnalyzer;
@@ -46,11 +53,23 @@ public class DiagOOM {
 	private ThreadAnalyzer threadAnalyzer;
 	private Map<Integer, Path> dominatorsToThreads;
 	
-	public DiagOOM(ISnapshot snapshot, IResultTree dominatorRootTree, String phase, float sizeLimitMB) {
+	private PrintWriter writer;
+	
+	public DiagOOM(ISnapshot snapshot, IResultTree dominatorRootTree, String phase, float sizeLimitMB, String outputFile) {
 		this.snapshot = snapshot;
 		this.dominatorRootTree = dominatorRootTree;
 		this.phase = phase;
 		this.sizeLimitMB = sizeLimitMB;
+
+		try {
+			File file = new File(outputFile);
+			if(!file.getParentFile().exists())
+				file.getParentFile().mkdirs();
+			this.writer = new PrintWriter(new BufferedWriter(new FileWriter(outputFile)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	// classify the memory-consuming objects into framework and user objects 
@@ -89,6 +108,7 @@ public class DiagOOM {
 	 * @return user objects
 	 */
 	private List<Row> filterFrameworkObjs(List<Row> largeDominators) {
+		/*
 		if(phase.equals("map") || phase.equals("spill")) {
 			MapPhaseAnalyzer mapAnaly = new MapPhaseAnalyzer(snapshot, largeDominators);
 			return mapAnaly.filterFrameworkObjs();
@@ -107,6 +127,16 @@ public class DiagOOM {
 		else if(phase.equals("reduce")) {
 			ReducePhaseAnalyzer redAnaly = new ReducePhaseAnalyzer(snapshot, largeDominators);
 			return redAnaly.filterFrameworkObjs();
+		}
+		*/
+		if(phase.equals("map")) {
+			MapStageAnalyzer mapAnalyzer = new MapStageAnalyzer(snapshot, largeDominators, writer);
+			return mapAnalyzer.filterFrameworkObjs();
+		}
+		
+		else if(phase.equals("reduce")){
+			ReduceStageAnalyzer reduceAnalyzer = new ReduceStageAnalyzer(snapshot, largeDominators, writer);
+			return reduceAnalyzer.filterFrameworkObjs();
 		}
 		
 		return largeDominators;
@@ -139,12 +169,31 @@ public class DiagOOM {
 	}
 	*/
 	
+	public void outputUserObjects() {
+		if(userObjs == null || userObjs.isEmpty())
+			return;
+		writer.println("### User Objects\n");
+		writer.println("| User object | shallow heap | retained heap | length | inner object | inner size | threads | code() |");
+		writer.println("|:------------| ------------:| -------------:| ------:|:------------ | ----------:| :------ | :------|");
+		
+		for(UserObj userObj : userObjs) {
+			writer.println(userObj);
+		}
+	}
+	
+	public void outputStackTrace() {
+		if(threadAnalyzer != null && dominatorsToThreads != null)
+			threadAnalyzer.output(dominatorsToThreads, writer);
+			
+		writer.close();
+	}
+	
 	public void displayUserObjects() {
 		if(userObjs == null || userObjs.isEmpty())
 			return;
 		System.out.println("### User Objects\n");
 		System.out.println("| User object | shallow heap | retained heap | length | inner object | inner size | threads | code() |");
-		System.out.println("|:------------| ------------:| -------------:| ------:|:------------ | ----------:| :------ | :------| ");
+		System.out.println("|:------------| ------------:| -------------:| ------:|:------------ | ----------:| :------ | :------|");
 		
 		for(UserObj userObj : userObjs) {
 			userObj.display();

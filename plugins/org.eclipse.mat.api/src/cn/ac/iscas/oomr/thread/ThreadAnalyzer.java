@@ -1,5 +1,6 @@
 package cn.ac.iscas.oomr.thread;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,9 +40,14 @@ public class ThreadAnalyzer {
 	private List<SinglePath> reduce = new ArrayList<SinglePath>();
 	private List<SinglePath> others = new ArrayList<SinglePath>();
 	
+	// used in findDomainatorsRecursive to avoid search other threads
+	private Set<Integer> threadIds;
+	
 	public ThreadAnalyzer(ISnapshot snapshot, String phase) {
 		this.snapshot = snapshot;
 		this.phase = phase;
+		
+		this.threadIds = new HashSet<Integer>();
 	}
 	
 	// find the required thread
@@ -65,6 +71,8 @@ public class ThreadAnalyzer {
 					for(String name : threadNames) {
 						if(tName.startsWith(name)) {
 							threadsToCheck.add(threadObj);
+							
+							threadIds.add(obj.getObjectId());
 							break;
 						}
 					}
@@ -75,6 +83,7 @@ public class ThreadAnalyzer {
 				e.printStackTrace();
 			}	
 		}
+		
 		
 		return threadsToCheck;
 	}
@@ -163,7 +172,13 @@ public class ThreadAnalyzer {
 			
 			if(dominators.contains(localObjId)) {
 				path.add(localObjId);
-				dominatorList.add(new SinglePath(localObjId, depth, path));
+					
+				// TODO: [need optimization] this operation is time-consuming
+				SinglePath sp = new SinglePath(localObjId, depth, path);
+				if(dominatorList.isEmpty())
+					dominatorList.add(sp);
+				else if(!dominatorList.get(dominatorList.size() - 1).equals(sp))
+					dominatorList.add(sp);
 				path.remove(path.size() - 1);
 			}
 			
@@ -175,11 +190,12 @@ public class ThreadAnalyzer {
 					String name = nr.getName();
 					
 					if(name.startsWith("<class>") || name.startsWith("<classloader>") 
-							|| name.startsWith("<super>") || name.startsWith("contextClassloader") || name.startsWith("me")) {
+							|| name.startsWith("<super>") || name.startsWith("contextClassloader") || name.startsWith("me")
+							|| name.startsWith("this$")) {
 						continue;			
 					}
 
-					if(nr.getObjectId() != localObjId) {
+					if(nr.getObjectId() != localObjId && !threadIds.contains(nr.getObjectId())) {
 						
 						findDomainatorsRecursive(nr.getObjectId(), dominatorList, depth + 1, path);
 						
@@ -192,7 +208,8 @@ public class ThreadAnalyzer {
 			e.printStackTrace();
 		}
 	}	
-		
+	
+	/*
 		
 	private void displayThreadDominators(IObject threadObj, IStackFrame sf, int objInStack, List<SinglePath> containedDominators) {
 		
@@ -220,13 +237,15 @@ public class ThreadAnalyzer {
 		}
 		
 	}
+	*/
 
 	public Map<Integer, Path> findReferencedThreads(List<UserObj> userObjs) {
 		String[] threadNames = null;
 		
-		if(phase.equals("map") || phase.equals("spill") || phase.equals("merge")) {
+		/*
+		(phase.equals("map") || phase.equals("spill") || phase.equals("merge")) {
 			threadNames = new String[2];
-			threadNames[0] = "main";
+			threadifNames[0] = "main";
 			threadNames[1] = "SpillThread";
 		} 
 		
@@ -243,7 +262,20 @@ public class ThreadAnalyzer {
 			threadNames[0] = "main";
 			//threadNames[1] = "Readahead";
 		}
+		*/
+		if(phase.equals("map")) {
+			threadNames = new String[2];
+			threadNames[0] = "main";
+			threadNames[1] = "SpillThread";
+		} 
 		
+		else if(phase.equals("reduce")) {
+			threadNames = new String[4];
+			threadNames[0] = "main";
+			threadNames[1] = "MapOutputCopier";
+			threadNames[2] = "Thread for merging in memory files";
+			threadNames[3] = "Thread for merging on-disk files";
+		}
 			
 			
 		List<Object> threadsOverview = selectThreads(threadNames);
@@ -417,7 +449,8 @@ public class ThreadAnalyzer {
 					sp.setThreadObjId(threadObjId);
 					sp.setStackframe(sf);
 					
-					foundObjSet.add(sp.getDominatorId());
+					if(!foundObjSet.contains(sp.getDominatorId()) && !method.equals("others"))
+						foundObjSet.add(sp.getDominatorId());
 				}
 				
 				
@@ -611,7 +644,7 @@ public class ThreadAnalyzer {
 	}
 
 	public void display(Map<Integer, Path> dominatorsToThreads) {
-		System.out.println("\n### Dominators => Threads and code() \n");
+		System.out.println("\n### User objects => Threads and code() \n");
 		
 		for(Entry<Integer, Path> dt : dominatorsToThreads.entrySet()) {
 			int dominatorId = dt.getKey();
@@ -630,6 +663,29 @@ public class ThreadAnalyzer {
 			
 		}
 		
+	}
+
+	public void output(Map<Integer, Path> dominatorsToThreads,
+			PrintWriter writer) {
+		
+		writer.println("\n### User objects => Threads and code() \n");
+		
+		for(Entry<Integer, Path> dt : dominatorsToThreads.entrySet()) {
+			int dominatorId = dt.getKey();
+			try {
+				IObject dominator = snapshot.getObject(dominatorId);
+				Path p = dt.getValue();
+				
+				writer.println("[" + dominator.getTechnicalName() + "] =>\n");
+				p.output(snapshot, writer);
+				writer.println();
+				
+			} catch (SnapshotException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 			
 }

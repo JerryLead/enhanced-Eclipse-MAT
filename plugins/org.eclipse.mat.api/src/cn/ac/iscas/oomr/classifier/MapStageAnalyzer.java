@@ -1,5 +1,6 @@
 package cn.ac.iscas.oomr.classifier;
 
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
@@ -12,7 +13,7 @@ import org.eclipse.mat.snapshot.model.NamedReference;
 
 import cn.ac.iscas.oomr.dominatortree.Row;
 
-public class MapPhaseAnalyzer {
+public class MapStageAnalyzer {
 
 	// framework objects
 	private Row kvbuffer;
@@ -24,10 +25,13 @@ public class MapPhaseAnalyzer {
 	
 	private Set<Integer> toDeleteObjIds;
 	
-	public MapPhaseAnalyzer(ISnapshot snapshot, List<Row> largeDominators) {
+	private PrintWriter writer;
+	
+	public MapStageAnalyzer(ISnapshot snapshot, List<Row> largeDominators, PrintWriter writer) {
 		this.snapshot = snapshot;
 		this.largeDominators = largeDominators;
 		toDeleteObjIds = new HashSet<Integer>();
+		this.writer = writer;
 	}
 	
 	
@@ -53,9 +57,12 @@ public class MapPhaseAnalyzer {
 		deleteFrameworkObjs();
 		
 		displayFrameworkObjs();
+		outputFrameworkObjs();
 		
 		return largeDominators;
 	}
+
+
 
 	// delete the segments from the List<Row> largeDominators
 	// the remaining objects are regarded as user objects
@@ -113,18 +120,49 @@ public class MapPhaseAnalyzer {
 		
 	}
 	
+	private void outputFrameworkObjs() {
+		if(writer == null)
+			return;
+		
+		writer.println("## Objects in Map Stage\n");
+		
+		writer.println("\n### Framework Objects\n");
+		
+		if(kvbuffer != null || kvindices != null || kvoffsets != null) {
+			
+			writer.println("| FrameworkObj \t| Inner object \t| shallowHeap \t| retainedHeap \t|");
+			writer.println("| :----------- | :----------- | -----------: | -----------: |");
+		
+			if(kvbuffer != null)
+				writer.println(kvbuffer);
+			if(kvindices != null)
+				writer.println(kvindices);
+			if(kvoffsets != null)
+				writer.println(kvoffsets);
+		}
+		writer.println();
+		writer.println();
+		
+	}
+
 	
 	public void displayFrameworkObjs() {
-		System.out.println("## OOM in map & spill phase\n");
+		System.out.println("## Objects in Map Stage\n");
 		
 		System.out.println("\n### Framework Objects\n");
-		System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
-		System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 		
-		System.out.println(kvbuffer);
-		System.out.println(kvindices);
-		System.out.println(kvoffsets);
+		if(kvbuffer != null || kvindices != null || kvoffsets != null) {
+			
+			System.out.println("| FrameworkObj \t| Class name \t| shallowHeap \t| retainedHeap \t|");
+			System.out.println("| :----------- | :----------- | -----------: | -----------: |");
 		
+			if(kvbuffer != null)
+				System.out.println(kvbuffer);
+			if(kvindices != null)
+				System.out.println(kvindices);
+			if(kvoffsets != null)
+				System.out.println(kvoffsets);
+		}
 		System.out.println();
 		System.out.println();
 	}
